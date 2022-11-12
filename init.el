@@ -6,6 +6,7 @@
 (setq user-init-file (or load-file-name (buffer-file-name)))
 (setq user-emacs-directory (file-name-directory user-init-file))
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp") 
 
 
 (require 'package)
