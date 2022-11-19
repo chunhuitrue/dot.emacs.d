@@ -169,6 +169,11 @@ when it inserts comment at the end of the line. "
           (indent-for-tab-command)))))
 
 
+(use-package flycheck
+  :ensure
+  )
+
+
 (use-package json-mode
   :ensure
   :config
@@ -284,11 +289,10 @@ when it inserts comment at the end of the line. "
 ;;   (add-hook 'before-save-hook 'lsp-format-buffer nil t))
 
 
-(use-package toml-mode :ensure)
-
-
-(use-package flycheck
+(use-package toml-mode
   :ensure
+  :config
+  (add-hook 'toml-mode-hook #'company-mode)
   )
 
 
