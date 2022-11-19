@@ -173,6 +173,7 @@ when it inserts comment at the end of the line. "
   :ensure
   :config
   (add-hook 'json-mode-hook #'flycheck-mode)
+  (add-hook 'json-mode-hook #'company-mode)  
   )
 
 
