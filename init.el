@@ -40,14 +40,12 @@
 (column-number-mode t)
 (which-function-mode t)
 (electric-pair-mode t)
+;; (setq word-wrap-by-category t)             ;按照中文折行
 
 
 ;; 平滑地进行半屏滚动，避免滚动后recenter操作
 (setq scroll-step 1
       scroll-conservatively 10000)
-
-
-(setq word-wrap-by-category t)             ;按照中文折行
 
 
 ;; 不显示 *scratch*
