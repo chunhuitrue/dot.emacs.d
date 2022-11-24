@@ -39,6 +39,7 @@
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
 (column-number-mode t)
 (which-function-mode t)
+(electric-pair-mode t)
 
 
 ;; 自动保存
