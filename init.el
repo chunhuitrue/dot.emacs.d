@@ -42,6 +42,21 @@
 (electric-pair-mode t)
 
 
+;; 平滑地进行半屏滚动，避免滚动后recenter操作
+(setq scroll-step 1
+      scroll-conservatively 10000)
+
+
+(setq word-wrap-by-category t)             ;按照中文折行
+
+
+;; 不显示 *scratch*
+(defun remove-scratch-buffer ()
+  (if (get-buffer "*scratch*")
+      (kill-buffer "*scratch*")))
+(add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
+
+
 ;; 自动保存
 ;; (setq auto-save-default nil)
 ;; (setq undo-tree-auto-save-history nil)
