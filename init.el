@@ -196,6 +196,11 @@ when it inserts comment at the end of the line. "
   )
 
 
+(use-package magit
+  :ensure
+  )
+
+
 (use-package helm
   :ensure
   :config
