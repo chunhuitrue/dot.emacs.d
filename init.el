@@ -202,6 +202,17 @@ when it inserts comment at the end of the line. "
   (define-key global-map (kbd "C-c o") 'helm-occur) ; 和helm-gtags查找系列一致的前缀
   (define-key global-map (kbd "C-x C-b") 'helm-mini)
   (define-key global-map (kbd "M-y") 'helm-show-kill-ring)
+
+  ;; 让helm的窗口显示在下方
+  ;; ;; 固定选用 bottom 的窗口
+  ;; (add-to-list 'display-buffer-alist
+  ;;              '("^\\*helm .*"
+  ;;                (display-buffer-at-bottom)))
+  ;; 用 side window
+  (add-to-list 'display-buffer-alist
+               '("^\\*helm .*"
+                 (display-buffer-in-side-window)
+                 (side . bottom)))
   )
 
 
