@@ -48,11 +48,12 @@
       scroll-conservatively 10000)
 
 
-;; 不显示 *scratch*
-(defun remove-scratch-buffer ()
-  (if (get-buffer "*scratch*")
-      (kill-buffer "*scratch*")))
-(add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
+;; ;; 不太好使。ec之后仍然会出现，一切换到其他buff之后才关闭scratch
+;; ;; 不显示 *scratch*
+;; (defun remove-scratch-buffer ()
+;;   (if (get-buffer "*scratch*")
+;;       (kill-buffer "*scratch*")))
+;; (add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
 
 
 ;; 自动保存
