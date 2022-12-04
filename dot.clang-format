@@ -1,0 +1,74 @@
+# ref: https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+
+---
+# 关闭格式化
+DisableFormat:	false
+
+# 语言: None, Cpp, Java, JavaScript, ObjC, Proto, TableGen, TextProto
+Language: Cpp
+# Visual Studio、LLVM、 Google、Chromium、Mozilla、WebKit、 Microsoft、GNU
+BasedOnStyle: LLVM
+ColumnLimit: 120
+AllowShortFunctionsOnASingleLine: InlineOnly
+AlignEscapedNewlines: Left
+AlignConsecutiveMacros: Consecutive
+IndentPPDirectives: AfterHash
+IndentWidth: 4
+PointerAlignment: Right
+MaxEmptyLinesToKeep: 1
+
+# 连续赋值时，对齐所有等号, 可以省略emacs align了
+AlignConsecutiveAssignments:	true
+
+# 连续声明时，对齐所有声明的变量名
+AlignConsecutiveDeclarations:	true
+
+# 对齐连续的尾随的注释
+AlignTrailingComments:	true
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+  # AfterClass: true                # 花括号在clase 同行尾部
+  AfterEnum: false
+  AfterStruct: false
+  SplitEmptyFunction: false
+  AfterFunction: false           # 函数开始的花括号独占一行
+
+# tab键盘的宽度
+TabWidth: 4
+UseTab: Never
+
+AlignConsecutiveDeclarations: true
+AlignConsecutiveMacros: true
+
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortBlocksOnASingleLine: Empty
+
+# 允许排序#include
+SortIncludes: false
+
+# 允许短的if语句保持在同一行
+AllowShortIfStatementsOnASingleLine:	false
+
+# 允许短的循环保持在同一行
+AllowShortLoopsOnASingleLine:	false
+
+# false表示函数实参要么都在同一行，要么都各自一行
+BinPackArguments:	true
+# false表示所有形参要么都在同一行，要么都各自一行
+BinPackParameters:	true
+
+# 中括号两边空格 [] 
+SpacesInSquareBrackets: false
+
+# 小括号两边添加空格
+SpacesInParentheses : false
+
+# 缩进case标签
+IndentCaseLabels: false
+
+# 在空的圆括号中添加空格
+SpaceInEmptyParentheses: false
+
+# 等号两边空格
+SpaceBeforeAssignmentOperators: true
