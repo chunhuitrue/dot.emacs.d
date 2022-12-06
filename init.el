@@ -383,6 +383,7 @@ when it inserts comment at the end of the line. "
   (setq lsp-headerline-breadcrumb-enable nil)
   ;; modeline上的灯泡
   (setq lsp-modeline-code-actions-enable t)
+  ;; (setq lsp-enable-indentation nil)     ; 关闭lsp的indent
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
   (add-hook 'c-mode-hook 'lsp)
