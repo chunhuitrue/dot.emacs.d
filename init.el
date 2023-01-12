@@ -128,6 +128,13 @@ when it inserts comment at the end of the line. "
   )
 
 
+
+;; If your default face is a fixed pitch (monospace) face, but in AsciiDoc files you liked to have normal text with a variable pitch face, buffer-face-mode is for you: (add-hook 'adoc-mode-hook (lambda() (buffer-face-mode t)))
+(use-package adoc-mode
+  :ensure t
+  )
+
+
 (use-package yasnippet
   :ensure
   :delight yas-minor-mode
