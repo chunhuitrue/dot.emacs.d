@@ -434,4 +434,13 @@ when it inserts comment at the end of the line. "
 ;;            ))))
 
 
+(use-package lua-mode
+  :ensure
+  :config
+  (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+  (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+  (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))  
+  )
+
+
 (server-start)
