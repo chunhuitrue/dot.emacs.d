@@ -434,6 +434,8 @@ when it inserts comment at the end of the line. "
 ;;            ))))
 
 
+;; https://emacs-lsp.github.io/lsp-mode/page/lsp-lua-lsp/
+;; lsp-clients-lua-lsp-server-install-dir 可配 默认是~/.luarocks/bin/
 (use-package lua-mode
   :ensure
   :config
