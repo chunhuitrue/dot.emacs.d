@@ -445,4 +445,13 @@ when it inserts comment at the end of the line. "
   )
 
 
+;; ssh中emacs copy的内容放到系统剪切板
+;; mac下不需要tmux配合其他配置
+;; https://github.com/spudlyo/clipetty
+(use-package clipetty
+  :ensure t
+  :hook (after-init . global-clipetty-mode)
+  )
+
+
 (server-start)
