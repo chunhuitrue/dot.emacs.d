@@ -128,6 +128,18 @@ when it inserts comment at the end of the line. "
   )
 
 
+;; "C-c SPC" ==> ace-jump-word-mode
+;; enter first character of a word, select the highlighted key to move to it.
+;; "C-u C-c SPC" ==> ace-jump-char-mode
+;; enter a character for query, select the highlighted key to move to it.
+;; "C-u C-u C-c SPC" ==> ace-jump-line-mode
+;; each non-empty line will be marked, select the highlighted key to move to it.
+(use-package ace-jump-mode
+  :ensure t
+  :config
+  (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+  )
+
 
 ;; If your default face is a fixed pitch (monospace) face, but in AsciiDoc files you liked to have normal text with a variable pitch face, buffer-face-mode is for you: (add-hook 'adoc-mode-hook (lambda() (buffer-face-mode t)))
 (use-package adoc-mode
