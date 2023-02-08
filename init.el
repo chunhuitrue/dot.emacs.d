@@ -405,7 +405,7 @@ when it inserts comment at the end of the line. "
   ;; (setq lsp-enable-indentation nil)     ; 关闭lsp的indent
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
-  (add-hook 'c-mode-hook 'lsp)          ; 如果机器上没装lsp，需要用gtags索引，需要关闭lsp
+  (add-hook 'c-mode-hook 'lsp)          ; 禁用c-mode的lsp-mode。如果机器上没装lsp，需要用gtags索引
   (add-hook 'rustic-mode-hook 'lsp)
   )
 
