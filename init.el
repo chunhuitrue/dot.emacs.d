@@ -110,6 +110,7 @@ when it inserts comment at the end of the line. "
   ;; (delight 'abbrev-mode " Abv" "abbrev") ; 替换显示的字符串
   (delight 'abbrev-mode nil "abbrev")
   (delight 'eldoc-mode nil "ElDoc")
+  (delight 'ivy-mode nil "ivy")  
   )
 
 
@@ -224,7 +225,7 @@ when it inserts comment at the end of the line. "
 (use-package helm
   :ensure
   :config
-  (define-key global-map (kbd "C-c o") 'helm-occur) ; 和helm-gtags查找系列一致的前缀
+  (define-key global-map (kbd "C-c o") 'helm-occur)  ; 和helm-gtags查找系列一致的前缀
   (define-key global-map (kbd "C-x C-b") 'helm-mini)
   (define-key global-map (kbd "M-y") 'helm-show-kill-ring)
 
@@ -473,6 +474,31 @@ when it inserts comment at the end of the line. "
   (add-hook 'yaml-mode-hook
             #'(lambda ()
                 (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+  )
+
+
+;; window layout布局：
+;; ivy-push-view保存当前窗口布局，ivy-pop-view删除窗口布局，ivy-switch-view 切换窗口布局。
+;; ivy-switch-buffer C-x b 切换buffer，其中包含保存的布局。
+(use-package ivy
+  :ensure t
+  :delight ivy-mode
+  :hook (after-init . ivy-mode)
+  :config
+  (global-set-key (kbd "C-c v") 'ivy-push-view)
+  (global-set-key (kbd "C-c V") 'ivy-pop-view)
+  (setq ivy-use-virtual-buffers t)      ; ivy-switch-buffer可以切换recentf, bookmarks, windows layout
+  ;; ;; 设置默认的layout
+  ;; ;; https://oremacs.com/2016/06/27/ivy-push-view/  
+  ;; (setq ivy-views
+  ;;     `(("dutch + notes {}"
+  ;;        (vert
+  ;;         (file "dutch.org")
+  ;;         (buffer "notes")))
+  ;;       ("ivy.el {}"
+  ;;        (horz
+  ;;         (file ,(find-library-name "ivy"))
+  ;;         (buffer "*scratch*")))))
   )
 
 
