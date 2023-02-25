@@ -350,6 +350,7 @@ when it inserts comment at the end of the line. "
 
 (use-package helm-lsp :ensure)
 
+
 ;; for rust-analyzer integration
 ;; 各种特性说明 https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
 (use-package lsp-mode
@@ -375,7 +376,6 @@ when it inserts comment at the end of the line. "
   (lsp-rust-analyzer-display-closure-return-type-hints t)
   (lsp-rust-analyzer-display-parameter-hints nil)
   (lsp-rust-analyzer-display-reborrow-hints nil)
-
   :bind (:map lsp-mode-map
               ("M-j" . lsp-ui-imenu)
               ("M-r" . lsp-find-references)
@@ -390,7 +390,6 @@ when it inserts comment at the end of the line. "
               ("C-c C-c h" . lsp-ui-doc-glance)
               ("C-c C-c D" . dap-hydra)
               )
-
   :config
   (setq lsp-lens-enable nil)
   ;; minibuf提示的文档说明
@@ -410,6 +409,7 @@ when it inserts comment at the end of the line. "
   (add-hook 'c-mode-hook 'lsp)          ; 禁用c-mode的lsp-mode。如果机器上没装lsp，需要用gtags索引
   (add-hook 'rustic-mode-hook 'lsp)
   )
+
 
 (use-package lsp-ui
   :ensure
@@ -479,6 +479,7 @@ when it inserts comment at the end of the line. "
 
 
 ;; window layout布局,tabbar方式:
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Tab-Bars.html
 ;; 新建一个tab    tab-new C-x t 2
 ;; 关闭一个tab    tab-close C-x t 0
 ;; tab改名        tab-rename C-x t r
@@ -487,6 +488,8 @@ when it inserts comment at the end of the line. "
 ;; 前一个tab      tab-previous C-x t O
 ;; 移动tab        tab-move C-x t m
 ;; tab列表        tab-list 也可以在其中标记D，然后x删除tab
+;; 关闭所有标签，除了当前标签 C-x t 1
+(setq tab-bar-close-last-tab-choice 'tab-bar-mode-disable)  ; tab-close可以关闭最后一个tab，参考：C-h v 查看这个变量的介绍
 
 
 ;; ;; window layout布局,ivy view方式,效果不好
