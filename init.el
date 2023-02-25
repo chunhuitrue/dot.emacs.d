@@ -28,6 +28,7 @@
   (package-install 'use-package))
 
 
+(server-start)
 (load-theme 'tango-dark t)
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq recentf-max-saved-items 10
@@ -477,29 +478,42 @@ when it inserts comment at the end of the line. "
   )
 
 
-;; window layout布局：
-;; ivy-push-view保存当前窗口布局，ivy-pop-view删除窗口布局，ivy-switch-view 切换窗口布局。
-;; ivy-switch-buffer C-x b 切换buffer，其中包含保存的布局。
-(use-package ivy
-  :ensure t
-  :delight ivy-mode
-  :hook (after-init . ivy-mode)
-  :config
-  (global-set-key (kbd "C-c v") 'ivy-push-view)
-  (global-set-key (kbd "C-c V") 'ivy-pop-view)
-  (setq ivy-use-virtual-buffers t)      ; ivy-switch-buffer可以切换recentf, bookmarks, windows layout
-  ;; ;; 设置默认的layout
-  ;; ;; https://oremacs.com/2016/06/27/ivy-push-view/  
-  ;; (setq ivy-views
-  ;;     `(("dutch + notes {}"
-  ;;        (vert
-  ;;         (file "dutch.org")
-  ;;         (buffer "notes")))
-  ;;       ("ivy.el {}"
-  ;;        (horz
-  ;;         (file ,(find-library-name "ivy"))
-  ;;         (buffer "*scratch*")))))
-  )
+;; window layout布局,tabbar方式:
+;; 新建一个tab    tab-new C-x t 2
+;; 关闭一个tab    tab-close C-x t 0
+;; tab改名        tab-rename C-x t r
+;; 切换上一次tab  tab-switch C-x t RET
+;; 后一个tab      tab-next C-x t o
+;; 前一个tab      tab-previous C-x t O
+;; 移动tab        tab-move C-x t m
+;; tab列表        tab-list 也可以在其中标记D，然后x删除tab
 
 
-(server-start)
+;; ;; window layout布局,ivy view方式,效果不好
+;; ;; ivy-push-view保存当前窗口布局，ivy-pop-view删除窗口布局，ivy-switch-view 切换窗口布局。
+;; ;; ivy-switch-buffer C-x b 切换buffer，其中包含保存的布局。
+;; ;; 在保存了layout之后，跳转到了其他文件。
+;; ;; 这时切换到其他地方再切换回原来名字的layout，会恢复最初的状态，并不会保留最后跳转后的状态。
+;; ;; 如果要保留最后状态，需要切换之前保存一下当前layout。  很麻烦
+;; (use-package ivy
+;;   :ensure t
+;;   :delight ivy-mode
+;;   :hook (after-init . ivy-mode)
+;;   :config
+;;   (global-set-key (kbd "C-c v") 'ivy-push-view)
+;;   (global-set-key (kbd "C-c V") 'ivy-pop-view)
+;;   (setq ivy-use-virtual-buffers t)      ; ivy-switch-buffer可以切换recentf, bookmarks, windows layout
+;;   ;; ;; 设置默认的layout
+;;   ;; ;; https://oremacs.com/2016/06/27/ivy-push-view/  
+;;   ;; (setq ivy-views
+;;   ;;     `(("dutch + notes {}"
+;;   ;;        (vert
+;;   ;;         (file "dutch.org")
+;;   ;;         (buffer "notes")))
+;;   ;;       ("ivy.el {}"
+;;   ;;        (horz
+;;   ;;         (file ,(find-library-name "ivy"))
+;;   ;;         (buffer "*scratch*")))))
+;;   )
+
+
