@@ -492,7 +492,98 @@ when it inserts comment at the end of the line. "
 (setq tab-bar-close-last-tab-choice 'tab-bar-mode-disable)  ; tab-close可以关闭最后一个tab，参考：C-h v 查看这个变量的介绍
 
 
-;; ;; window layout布局,ivy view方式,效果不好
+;; ;; window layout布局elscreen方式,效果不好
+;; ;; 布局1中已经打开了一个buff tt.txt，这是在布局2中切换buff到tt.txt，会跳到布局1,然后就不再跳了
+;; ;; https://github.com/knu/elscreen
+;; ;; C-z c
+;; ;; C-z C-c
+;; ;; Create a new screen and switch to it.
+
+;; ;; C-z C
+;; ;; Create a new screen with the window-configuration of the current screen.
+
+;; ;; C-z k
+;; ;; C-z C-k
+;; ;; Kill current screen.
+
+;; ;; C-z M-k
+;; ;; Kill current screen and buffers.
+
+;; ;; C-z K
+;; ;; Kill other screens.
+
+;; ;; C-z n
+;; ;; C-z C-n
+;; ;; Switch to the "next" screen in a cyclic order.
+
+;; ;; C-z p
+;; ;; C-z C-p
+;; ;; Switch to the "previous" screen in a cyclic order.
+
+;; ;; C-z a
+;; ;; C-z C-a
+;; ;; Toggle to the screen selected previously.
+
+;; ;; C-z '
+;; ;; Prompt for a screen number to switch to.
+
+;; ;; C-z "
+;; ;; Present a list of all screens for selection.
+
+;; ;; C-z 0..9
+;; ;; Jump to the screen number 0-9.
+
+;; ;; C-z C-s
+;; ;; Swap current screen with previous one.
+
+;; ;; C-z w
+;; ;; C-z C-w
+;; ;; Show a list of screen.
+
+;; ;; C-z A
+;; ;; Allow the user to enter a name for the current screen.
+
+;; ;; C-z m
+;; ;; C-z C-m
+;; ;; Repeat the last message displayed in the mini-buffer.
+
+;; ;; C-z t
+;; ;; C-z C-t
+
+;; ;; C-z b
+;; ;; Switch to the screen in which specified buffer is splayed.
+
+;; ;; C-z C-f
+;; ;; Create new screen and open file.
+
+;; ;; C-z C-r
+;; ;; Create new screen and open file but don't allow changes.
+
+;; ;; C-z d
+;; ;; Create new screen and run dired.
+
+;; ;; C-z M-x
+;; ;; Read function name, then call it with new screen.
+
+;; ;; C-z i
+;; ;; Show/hide the screen number in the mode line.
+
+;; ;; C-z T
+;; ;; Show/hide the tab on the top of each frame.
+
+;; ;; C-z v
+;; ;; Display ElScreen version.
+;; ;; C-z ?
+;; ;; Show key bindings of ElScreen and Add-On softwares.
+;; (use-package elscreen
+;;   :ensure t
+;;   :config
+;;   (setq elscreen-prefix-key "\C-z")     ; C-z 默认是挂起emacs到后台,改为elscreen前缀之后，可以用C-x C-z 来挂起emacs
+;;   )
+;; (elscreen-start)
+
+
+;; ;; window layout布局,ivy view方式,不是想要的效果
 ;; ;; ivy-push-view保存当前窗口布局，ivy-pop-view删除窗口布局，ivy-switch-view 切换窗口布局。
 ;; ;; ivy-switch-buffer C-x b 切换buffer，其中包含保存的布局。
 ;; ;; 在保存了layout之后，跳转到了其他文件。
@@ -518,5 +609,3 @@ when it inserts comment at the end of the line. "
 ;;   ;;         (file ,(find-library-name "ivy"))
 ;;   ;;         (buffer "*scratch*")))))
 ;;   )
-
-
