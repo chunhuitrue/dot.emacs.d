@@ -406,7 +406,11 @@ when it inserts comment at the end of the line. "
   ;; (setq lsp-enable-indentation nil)     ; 关闭lsp的indent
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
-  (add-hook 'c-mode-hook 'lsp)          ; 禁用c-mode的lsp-mode。如果机器上没装lsp，需要用gtags索引
+  ;; 如果系统中没有安装clangd，就不用lsp-mode来索引和扩展。否则会导致索引跳转的快捷键不可用.
+  ;; 另外一个办法就是在项目目录下放入.dir-locals.el。但是需要手动打开一次.dir-locals.el。来触发执行。
+  (if (executable-find "clangd")
+      (add-hook 'c-mode-hook 'lsp)
+    )
   (add-hook 'rustic-mode-hook 'lsp)
   )
 
