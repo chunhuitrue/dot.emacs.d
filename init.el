@@ -253,15 +253,6 @@ when it inserts comment at the end of the line. "
   )
 
 
-(use-package helm-xref
-  :ensure
-  :config
-  (define-key global-map [remap find-file] #'helm-find-files)
-  (define-key global-map [remap execute-extended-command] #'helm-M-x)
-  (define-key global-map [remap switch-to-buffer] #'helm-mini)
-  )
-
-
 ;; https://github.com/bbatsov/helm-projectile
 ;; https://tuhdo.github.io/helm-projectile.html
 (use-package helm-projectile
@@ -298,38 +289,13 @@ when it inserts comment at the end of the line. "
   )
 
 
-(use-package helm-gtags
-  :ensure
-  :delight helm-gtags-mode  
-  :config
-  (with-eval-after-load 'helm-gtags
-    (setq helm-gtags-path-style 'relative)
-    (setq helm-gtags-ignore-case t)
-    (setq helm-gtags-auto-update t)     ; buffer保存后，自动更新tags
-    (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
-    (define-key helm-gtags-mode-map (kbd "M-t") 'helm-gtags-find-tag)
-    (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
-    (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol)
-    (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
-    (define-key helm-gtags-mode-map (kbd "C-c j") 'helm-gtags-tags-in-this-function) ;显示当前函数内部的tag
-    (define-key helm-gtags-mode-map (kbd "C-c h") 'helm-gtags-select) ;显示所有的tag
-    (define-key helm-gtags-mode-map (kbd "C-c i") 'helm-semantic-or-imenu)
-    (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
-    (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
-    (define-key helm-gtags-mode-map (kbd "C-c f") 'helm-gtags-parse-file) ; 当前文件的所有tag
-    (define-key helm-gtags-mode-map (kbd "C-c r") 'helm-gtags-resume) ;针对某个查找过的符号给摘要
-    )
-  (add-hook 'c-mode-hook 'helm-gtags-mode)
-  (add-hook 'dired-mode-hook 'helm-gtags-mode)
-)
-
-
 (use-package rustic
   :ensure
   :config
   ;; 存盘时自动格式化。C-c C-c C-o 手动格式化一个buffer
   ;; (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)
   )
+
 
 ;; (defun rk/rustic-mode-hook ()
 ;;   ;; so that run C-c C-c C-r works without having to confirm, but don't try to
@@ -348,7 +314,52 @@ when it inserts comment at the end of the line. "
   )
 
 
-(use-package helm-lsp :ensure)
+(use-package helm-xref
+  :ensure
+  :config
+  (define-key global-map [remap find-file] #'helm-find-files)
+  (define-key global-map [remap execute-extended-command] #'helm-M-x)
+  (define-key global-map [remap switch-to-buffer] #'helm-mini)
+  )
+
+
+(use-package helm-gtags
+  :ensure
+  :delight helm-gtags-mode  
+  :config
+  (with-eval-after-load 'helm-gtags
+    (setq helm-gtags-path-style 'relative)
+    (setq helm-gtags-ignore-case t)
+    (setq helm-gtags-auto-update t)     ; buffer保存后，自动更新tags
+    (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
+    (define-key helm-gtags-mode-map (kbd "M-t") 'helm-gtags-find-tag)
+    (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
+    (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol)
+    (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
+    (define-key helm-gtags-mode-map (kbd "C-c j") 'helm-gtags-tags-in-this-function) ; 当前函数内部的符号
+    (define-key helm-gtags-mode-map (kbd "C-c h") 'helm-gtags-select)                ; 整个项目的符号
+    (define-key helm-gtags-mode-map (kbd "C-c i") 'helm-semantic-or-imenu)           ; 当前buff中的符号
+    (define-key helm-gtags-mode-map (kbd "C-c f") 'helm-gtags-parse-file)            ; 分析当前文件的所有符号
+    (define-key helm-gtags-mode-map (kbd "C-c r") 'helm-gtags-resume)                ;针对某个查找过的符号给摘要
+    (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
+    (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
+    )
+  (add-hook 'dired-mode-hook 'helm-gtags-mode)
+)
+
+
+;; https://github.com/emacs-lsp/helm-lsp
+;; helm-lsp-workspace-symbol - workspace symbols for the current workspace
+;; helm-lsp-global-workspace-symbol - workspace symbols from all of the active workspaces.
+;; helm-lsp-code-actions - helm interface to lsp-execute-code-action.
+;; helm-lsp-switch-project - switch lsp-mode project (when helm-projectile is present)
+;; helm-lsp-diagnostics - browse the errors in the project.
+;; Sample query: *err #Test.js Foo Bar will return all of the errors which message contains Foo and Bar, it is in file Test.js and its severity is error
+(use-package helm-lsp
+  :ensure
+  :config
+  (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol)
+  )
 
 
 ;; for rust-analyzer integration
@@ -377,18 +388,35 @@ when it inserts comment at the end of the line. "
   (lsp-rust-analyzer-display-parameter-hints nil)
   (lsp-rust-analyzer-display-reborrow-hints nil)
   :bind (:map lsp-mode-map
-              ("M-j" . lsp-ui-imenu)
+              ;; 跳到定义  M-.  xref-find-definitions
+              ;; 返回      M-,  xref-pop-marker-stack              
               ("M-r" . lsp-find-references)
-              ("C-c C-c d" . lsp-describe-thing-at-point)
+              ("M-j" . lsp-ui-imenu)                    ; 当前buff内的符号。没有模糊查找 helm-semantic-or-imenu 或 helm-imenu 更好
+              ("C-c i" . helm-semantic-or-imenu)        ; 当前buff内的符号。有模糊查找。 helm-imenu C-c i 或 C-x c i更好
+              ("C-c x i" . helm-lsp-workspace-symbol)   ; 整个项目的符号。
+              
+              ("C-c C-c g" . lsp-find-definition)      ; 同 M-.
+              ("C-c C-c d" . lsp-find-declaration)     ; 同 M-.
+              ("C-c C-c t" . lsp-find-type-definition) ; 同 M-.
+              ("C-c C-c i" . lsp-find-implementation)
+
+              ("C-c C-p r" . lsp-ui-peek-find-references)
+              ("C-c C-p d" . lsp-ui-peek-find-definitions)   ; 同 M-.
+              ("C-c C-p i" . lsp-ui-peek-find-implementation)
+              ;; ("C-c C-p s" . lsp-ui-peek-find-workspace-symbol) ; 整个项目的符号。c语言中找不到。helm-lsp-workspace-symbol 更好
+
               ("C-c C-c l" . flycheck-list-errors)
-              ("C-c C-c a" . lsp-execute-code-action)
               ("C-c C-c r" . lsp-rename)
+              
+              ("C-c C-c p" . lsp-describe-thing-at-point)
+              ("C-c C-c u" . lsp-ui-doc-glance)
               ("C-c C-c s" . lsp-rust-analyzer-status)
               ("C-c C-c e" . lsp-rust-analyzer-expand-macro)
-              ("C-c C-c q" . lsp-workspace-restart)
-              ("C-c C-c Q" . lsp-workspace-shutdown)
-              ("C-c C-c h" . lsp-ui-doc-glance)
-              ("C-c C-c D" . dap-hydra)
+
+              ;; ("C-c C-c H" . dap-hydra)
+              ;; ("C-c C-c a" . lsp-execute-code-action)
+              ;; ("C-c C-c q" . lsp-workspace-restart)
+              ;; ("C-c C-c Q" . lsp-workspace-shutdown)
               )
   :config
   (setq lsp-lens-enable nil)
@@ -406,11 +434,6 @@ when it inserts comment at the end of the line. "
   ;; (setq lsp-enable-indentation nil)     ; 关闭lsp的indent
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
-  ;; 如果系统中没有安装clangd，就不用lsp-mode来索引和扩展。否则会导致索引跳转的快捷键不可用.
-  ;; 另外一个办法就是在项目目录下放入.dir-locals.el。但是需要手动打开一次.dir-locals.el。来触发执行。
-  (if (executable-find "clangd")
-      (add-hook 'c-mode-hook 'lsp)
-    )
   (add-hook 'rustic-mode-hook 'lsp)
   )
 
@@ -423,6 +446,18 @@ when it inserts comment at the end of the line. "
   (lsp-ui-peek-always-show nil)
   (lsp-ui-sideline-show-hover nil)
   (lsp-ui-doc-enable nil))
+
+
+;; 如果系统中没有安装clangd，就不用lsp-mode来索引和扩展。否则会导致索引跳转的快捷键不可用.
+;; 另外一个办法就是在项目目录下放入.dir-locals.el。但是需要手动打开一次.dir-locals.el。来触发执行。
+(if (executable-find "clangd")
+    (add-hook 'c-mode-hook 'lsp)
+  (add-hook 'c-mode-hook 'helm-gtags-mode)
+  )
+
+;; ;; 同时用两种模式
+;; (add-hook 'c-mode-hook 'lsp)
+;; (add-hook 'c-mode-hook 'helm-gtags-mode)
 
 
 ;; ;; setting up debugging support with dap-mode
