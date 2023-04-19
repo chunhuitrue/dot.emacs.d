@@ -3,8 +3,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(yasnippet-snippets yaml-mode which-key use-package toml-mode selectrum rustic rust-playground magit lua-mode lsp-ui lsp-treemacs json-mode ivy helm-xref helm-rg helm-projectile helm-lsp helm-gtags golden-ratio flycheck exec-path-from-shell elscreen delight company clipetty adoc-mode ace-jump-mode)))
+ '(safe-local-variable-values
+   '((define-key helm-gtags-mode-map
+       (kbd "M-,")
+       'helm-gtags-pop-stack)
+     (define-key helm-gtags-mode-map
+       (kbd "C-c >")
+       'helm-gtags-next-history)
+     (eval add-hook 'c-mode-hook 'helm-gtags-mode)
+     (eval remove-hook 'c-mode-hook 'helm-gtags-mode)
+     (eval remove-hook 'c-mode-hook 'lsp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
