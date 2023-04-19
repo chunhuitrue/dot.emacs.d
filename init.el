@@ -226,10 +226,11 @@ when it inserts comment at the end of the line. "
 (use-package helm
   :ensure
   :config
-  (define-key global-map (kbd "C-c o") 'helm-occur)  ; 和helm-gtags查找系列一致的前缀
   (define-key global-map (kbd "C-x C-b") 'helm-mini)
   (define-key global-map (kbd "M-y") 'helm-show-kill-ring)
-
+  (define-key global-map (kbd "C-c i") 'helm-semantic-or-imenu)  ; 当前buff中的符号
+  (define-key global-map (kbd "C-c o") 'helm-occur)              ; 当前buff中查找关键字
+  
   ;; 让helm的窗口显示在下方
   ;; ;; 固定选用 bottom 的窗口
   ;; (add-to-list 'display-buffer-alist
@@ -338,7 +339,6 @@ when it inserts comment at the end of the line. "
     (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
     (define-key helm-gtags-mode-map (kbd "C-c j") 'helm-gtags-tags-in-this-function) ; 当前函数内部的符号
     (define-key helm-gtags-mode-map (kbd "C-c h") 'helm-gtags-select)                ; 整个项目的符号
-    (define-key helm-gtags-mode-map (kbd "C-c i") 'helm-semantic-or-imenu)           ; 当前buff中的符号
     (define-key helm-gtags-mode-map (kbd "C-c f") 'helm-gtags-parse-file)            ; 分析当前文件的所有符号
     (define-key helm-gtags-mode-map (kbd "C-c r") 'helm-gtags-resume)                ;针对某个查找过的符号给摘要
     (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
@@ -392,7 +392,6 @@ when it inserts comment at the end of the line. "
               ;; 返回      M-,  xref-pop-marker-stack              
               ("M-r" . lsp-find-references)
               ("M-j" . lsp-ui-imenu)                    ; 当前buff内的符号。没有模糊查找 helm-semantic-or-imenu 或 helm-imenu 更好
-              ("C-c i" . helm-semantic-or-imenu)        ; 当前buff内的符号。有模糊查找。 helm-imenu C-c i 或 C-x c i更好
               ("C-c x i" . helm-lsp-workspace-symbol)   ; 整个项目的符号。
               
               ("C-c C-c g" . lsp-find-definition)      ; 同 M-.
