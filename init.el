@@ -412,7 +412,6 @@ when it inserts comment at the end of the line. "
               ("C-c C-c s" . lsp-rust-analyzer-status)
               ("C-c C-c e" . lsp-rust-analyzer-expand-macro)
 
-              ("C-c C-c h" . dap-hydra)
               ;; ("C-c C-c a" . lsp-execute-code-action)
               ;; ("C-c C-c q" . lsp-workspace-restart)
               ;; ("C-c C-c Q" . lsp-workspace-shutdown)
@@ -467,6 +466,9 @@ when it inserts comment at the end of the line. "
 (when (executable-find "lldb-mi")
   (use-package dap-mode
     :ensure
+    :bind (:map dap-mode
+                ("C-c C-c h" . dap-hydra)
+                )
     :config
     (dap-ui-mode)
     (dap-ui-controls-mode 1)
