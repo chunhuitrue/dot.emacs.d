@@ -7,9 +7,6 @@
    '((define-key helm-gtags-mode-map
        (kbd "M-,")
        'helm-gtags-pop-stack)
-     (define-key helm-gtags-mode-map
-       (kbd "C-c >")
-       'helm-gtags-next-history)
      (eval add-hook 'c-mode-hook 'helm-gtags-mode)
      (eval remove-hook 'c-mode-hook 'helm-gtags-mode)
      (eval remove-hook 'c-mode-hook 'lsp))))

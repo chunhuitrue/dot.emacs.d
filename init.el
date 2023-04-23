@@ -244,9 +244,6 @@ when it inserts comment at the end of the line. "
   )
 
 
-(use-package lsp-treemacs :ensure)
-
-
 (use-package helm-rg
   :ensure
   :config
@@ -391,14 +388,16 @@ when it inserts comment at the end of the line. "
               ;; 跳到定义  M-.  xref-find-definitions
               ;; 返回      M-,  xref-pop-marker-stack              
               ("M-r" . lsp-find-references)
-              ("M-j" . lsp-ui-imenu)                    ; 当前buff内的符号。没有模糊查找 helm-semantic-or-imenu 或 helm-imenu 更好
+              ("M-j" . lsp-ui-imenu)                    ; 当前buff内的符号。没有模糊查找 helm-semantic-or-imenu 或 helm-imenu 更好.
+              ("C-c C-c S" . lsp-treemacs-symbols)      ; 当前buff内的符号。没模糊查找。
               ("C-c x i" . helm-lsp-workspace-symbol)   ; 整个项目的符号。
               
               ("C-c C-c g" . lsp-find-definition)      ; 同 M-.
               ("C-c C-c d" . lsp-find-declaration)     ; 同 M-.
               ("C-c C-c t" . lsp-find-type-definition) ; 同 M-.
               ("C-c C-c i" . lsp-find-implementation)
-
+              ("C-c C-c h" . lsp-treemacs-call-hierarchy)  ; 显示函数调用级别
+              
               ("C-c C-p r" . lsp-ui-peek-find-references)
               ("C-c C-p d" . lsp-ui-peek-find-definitions)   ; 同 M-.
               ("C-c C-p i" . lsp-ui-peek-find-implementation)
@@ -444,6 +443,9 @@ when it inserts comment at the end of the line. "
   (lsp-ui-peek-always-show nil)
   (lsp-ui-sideline-show-hover nil)
   (lsp-ui-doc-enable nil))
+
+
+(use-package lsp-treemacs :ensure)
 
 
 ;; 如果系统中没有安装clangd，就不用lsp-mode来索引和扩展。否则会导致索引跳转的快捷键不可用.
