@@ -449,7 +449,7 @@ when it inserts comment at the end of the line. "
 
 
 ;; 如果系统中没有安装clangd，就不用lsp-mode来索引和扩展。否则会导致索引跳转的快捷键不可用.
-;; 另外一个办法就是在项目目录下放入.dir-locals.el。但是需要手动打开一次.dir-locals.el。来触发执行。
+;; 另外一个办法是在项目目录下放入.dir-locals.el
 (if (executable-find "clangd")
     (add-hook 'c-mode-hook 'lsp)
   (add-hook 'c-mode-hook 'helm-gtags-mode)
