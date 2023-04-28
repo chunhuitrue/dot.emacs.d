@@ -39,9 +39,18 @@
 (menu-bar-mode 0)
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode 0))
 (column-number-mode t)
-(which-function-mode t)
 (electric-pair-mode t)
 ;; (setq word-wrap-by-category t)             ;按照中文折行
+
+
+(which-function-mode t)
+;; ;; 让函数命显示在buffer行首
+;; (setq-default header-line-format
+;;               '((which-func-mode ("" which-func-format " "))))
+;; (setq mode-line-misc-info
+;;             ;; We remove Which Function Mode from the mode line, because it's mostly
+;;             ;; invisible here anyway.
+;;       (assq-delete-all 'which-func-mode mode-line-misc-info))
 
 
 ;; 平滑地进行半屏滚动，避免滚动后recenter操作
