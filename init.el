@@ -44,7 +44,7 @@
 
 
 (which-function-mode t)
-;; ;; 让函数命显示在buffer行首
+;; ;; 让函数命显示在buffer行首。see：lsp-headerline-breadcrumb-enable
 ;; (setq-default header-line-format
 ;;               '((which-func-mode ("" which-func-format " "))))
 ;; (setq mode-line-misc-info
@@ -368,13 +368,12 @@ when it inserts comment at the end of the line. "
   )
 
 
-;; for rust-analyzer integration
 ;; 各种特性说明 https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
 (use-package lsp-mode
   :ensure
   :commands lsp
   :custom
-  (lsp-eldoc-render-all t)
+  (lsp-eldoc-render-all nil) ; 自动在minibuf显示函数的文档打扰太多，关闭。
   (lsp-idle-delay 0.5)
   (gc-cons-threshold (* 100 1024 1024))
   (read-process-output-max (* 1024 1024))
@@ -426,18 +425,13 @@ when it inserts comment at the end of the line. "
               )
   :config
   (setq lsp-lens-enable nil)
-  ;; minibuf提示的文档说明
-  (setq lsp-eldoc-hook nil)
-  ;; 光标所在位置关键字高亮
-  (setq lsp-enable-symbol-highlighting nil)
+  (setq lsp-eldoc-hook nil)                                 ; minibuf提示的文档说明，太打扰。用lsp-ui-doc-glance
+  (setq lsp-enable-symbol-highlighting nil)                 ; 光标所在位置关键字高亮
   ;; (setq lsp-signature-auto-activate nil)
-  ;; 在变量函数后面标记类型说明，容易被误以为实际写的代码
-  (setq lsp-rust-analyzer-server-display-inlay-hints nil)
-  ;; 在编辑器抬头显示文件路径和函数名
-  (setq lsp-headerline-breadcrumb-enable nil)
-  ;; modeline上的灯泡
-  (setq lsp-modeline-code-actions-enable t)
-  ;; (setq lsp-enable-indentation nil)     ; 关闭lsp的indent
+  (setq lsp-rust-analyzer-server-display-inlay-hints nil)   ; 在变量函数后面标记类型说明，容易被误以为实际写的代码
+  (setq lsp-headerline-breadcrumb-enable nil)               ; 在编辑器抬头显示文件路径和函数名。see: which-function-mode
+  (setq lsp-modeline-code-actions-enable t)                 ; modeline上的灯泡
+  ;; (setq lsp-enable-indentation nil)                      ; 关闭lsp的indent.目录下用.clang_format
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
   (add-hook 'rustic-mode-hook 'lsp)
