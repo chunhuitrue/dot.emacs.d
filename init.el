@@ -321,6 +321,18 @@ when it inserts comment at the end of the line. "
   )
 
 
+;; https://github.com/Alexander-Miller/treemacs/issues/100
+;; https://github.com/Alexander-Miller/treemacs/issues/742
+;; 颜色模式没有默认的背景色...
+;; 加上这个配置后，去除daemon启动的时候提示的如下警告，带警告也没其他影响
+;; [Treemacs] Warning: coudn’t find default background colour for icons, falling back on #2d2d31.
+;; [Treemacs] Warning: couldn’t find hl-line-mode’s background color for icons, falling back on #2d2d31.
+(use-package treemacs
+  :init
+  (setq treemacs-no-load-time-warnings t)
+  )
+
+
 (use-package helm-xref
   :ensure
   :config
