@@ -463,7 +463,7 @@ when it inserts comment at the end of the line. "
 (use-package lsp-treemacs :ensure)
 
 
-;; 如果系统中没有安装clangd，就不用lsp-mode来索引和扩展。否则会导致索引跳转的快捷键不可用.
+;; 如果系统中没有安装clangd，或者虽然安装了clangd，但是项目无法编译。就不用lsp-mode来索引和扩展。否则会导致索引跳转的快捷键不可用.
 ;; 另外一个办法是在项目目录下放入.dir-locals.el
 (if (executable-find "clangd")
     (add-hook 'c-mode-hook 'lsp)
