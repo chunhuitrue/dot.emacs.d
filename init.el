@@ -643,3 +643,44 @@ when it inserts comment at the end of the line. "
 ;;   ;;         (file ,(find-library-name "ivy"))
 ;;   ;;         (buffer "*scratch*")))))
 ;;   )
+
+
+
+;; tree-sitter 颜色模式
+(setq major-mode-remap-alist
+      '(
+        (bash-mode . bash-ts-mode)
+        (c-mode . c-ts-mode)
+        (rust-mode . rust-ts-mode)
+        (python-mode . python-ts-mode)
+        (json-mode . json-ts-mode)
+        (yaml-mode . yaml-ts-mode)        
+        (js2-mode . js-ts-mode)
+        (typescript-mode . typescript-ts-mode)
+        (css-mode . css-ts-mode)
+      ))
+
+;; 需要把原有的hook hook到对应的ts mode上
+(setq c-ts-mode-hook c-mode-hook)
+(setq rust-ts-mode-hook rust-mode-hook)
+
+
+;; 目前不支持c语言
+;; ;; 提供菜单操作treesit
+;; ;; C-c t o 调出菜单界面
+;; ;; M-P 和 M-N 可以快速拖动 node
+;; (use-package combobulate
+;;   :preface
+;;   (setq combobulate-key-prefix "C-c t")
+
+;;   ;; Optional, but recommended.
+;;   ;;
+;;   ;; You can manually enable Combobulate with `M-x
+;;   ;; combobulate-mode'.
+;;   :hook ((python-ts-mode . combobulate-mode)
+;;          (js-ts-mode . combobulate-mode)
+;;          (css-ts-mode . combobulate-mode)
+;;          (yaml-ts-mode . combobulate-mode)
+;;          (typescript-ts-mode . combobulate-mode)
+;;          (tsx-ts-mode . combobulate-mode))
+;;   :load-path ("~/.emacs.d/site-lisp/combobulate"))
