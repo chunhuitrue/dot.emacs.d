@@ -234,8 +234,8 @@ when it inserts comment at the end of the line. "
         '(
           ;; (stashes . hide)
           ;; (untracked . show)
-          (unpulled . show)
           ;; (unstaged . show)
+          (unpulled . show)
           (unpushed . show)
           ))
   )
