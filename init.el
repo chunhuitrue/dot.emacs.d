@@ -659,50 +659,11 @@ when it inserts comment at the end of the line. "
 ;;   )
 
 
-;; 会导致lsp失败
-;; LSP :: There are no language servers supporting current mode `c-ts-mode' registered with `lsp-mode'.
-;; This issue might be caused by:
-;; 1. The language you are trying to use does not have built-in support in `lsp-mode'. You must install the required support manually. Examples of this are `lsp-java' or `lsp-metals'.
-;; 2. The language server that you expect to run is not configured to run for major mode `c-ts-mode'. You may check that by checking the `:major-modes' that are passed to `lsp-register-client'.
-;; 3. `lsp-mode' doesn't have any integration for the language behind `c-ts-mode'. Refer to https://emacs-lsp.github.io/lsp-mode/page/languages and https://langserver.org/ .
-;; 4. You are over `tramp'. In this case follow https://emacs-lsp.github.io/lsp-mode/page/remote/.
-;; 5. You have disabled the `lsp-mode' clients for that file. (Check `lsp-enabled-clients' and `lsp-disabled-clients').
-
-;; ;; tree-sitter 颜色模式
-;; (setq major-mode-remap-alist
-;;       '(
-;;         (bash-mode . bash-ts-mode)
-;;         (c-mode . c-ts-mode)
-;;         (rust-mode . rust-ts-mode)
-;;         (python-mode . python-ts-mode)
-;;         (json-mode . json-ts-mode)
-;;         (yaml-mode . yaml-ts-mode)        
-;;         (js2-mode . js-ts-mode)
-;;         (typescript-mode . typescript-ts-mode)
-;;         (css-mode . css-ts-mode)
-;;       ))
-
-;; ;; 需要把原有的hook hook到对应的ts mode上
-;; (setq c-ts-mode-hook c-mode-hook)
-;; (setq rust-ts-mode-hook rust-mode-hook)
+;; tree-sitter 颜色模式
+;; 只有c可以。rustic-mode照抄颜色全白
+(define-derived-mode c-mode c-ts-mode "C")
+(dolist (ext '("\\.c\\'"))
+  (setf auto-mode-alist (assoc-delete-all ext auto-mode-alist))
+  (add-to-list 'auto-mode-alist `(,ext . c-mode)))
 
 
-;; 目前不支持c语言
-;; ;; 提供菜单操作treesit
-;; ;; C-c t o 调出菜单界面
-;; ;; M-P 和 M-N 可以快速拖动 node
-;; (use-package combobulate
-;;   :preface
-;;   (setq combobulate-key-prefix "C-c t")
-
-;;   ;; Optional, but recommended.
-;;   ;;
-;;   ;; You can manually enable Combobulate with `M-x
-;;   ;; combobulate-mode'.
-;;   :hook ((python-ts-mode . combobulate-mode)
-;;          (js-ts-mode . combobulate-mode)
-;;          (css-ts-mode . combobulate-mode)
-;;          (yaml-ts-mode . combobulate-mode)
-;;          (typescript-ts-mode . combobulate-mode)
-;;          (tsx-ts-mode . combobulate-mode))
-;;   :load-path ("~/.emacs.d/site-lisp/combobulate"))
