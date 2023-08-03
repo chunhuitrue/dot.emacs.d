@@ -236,7 +236,7 @@ when it inserts comment at the end of the line. "
           ;; (untracked . show)
           (unpulled . show)
           ;; (unstaged . show)
-          ;; (unpushed . show)
+          (unpushed . show)
           ))
   )
 
