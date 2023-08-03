@@ -229,6 +229,15 @@ when it inserts comment at the end of the line. "
 
 (use-package magit
   :ensure
+  :config
+  (setq magit-section-initial-visibility-alist
+        '(
+          ;; (stashes . hide)
+          ;; (untracked . show)
+          (unpulled . show)
+          ;; (unstaged . show)
+          ;; (unpushed . show)
+          ))
   )
 
 
