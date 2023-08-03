@@ -227,22 +227,22 @@ when it inserts comment at the end of the line. "
   )
 
 
-;; 如果想获取 magit-section-initial-visibility-alist 值中具体某个类型名称，可 M-x magit-describe-section-briefly 获取。
-;; 比如想知道 Recent commits 这个版块的类型名称：
-;; 1. 光标在Recent commits上， M-x magit-describe-section-briefly RET ，得到 #<magit-section “@{upstream}…”
-;; [unpushed status] 372-935>，所以类型名称为 unpushed
-;; 2. 由此设置可使 “Recent commits” 和 “Unpulled from upstream” 在打开 magit-st时自动展开。
 (use-package magit
   :ensure
   :config
-  (setq magit-section-initial-visibility-alist
-        '(
-          ;; (stashes . hide)
-          ;; (untracked . show)
-          ;; (unstaged . show)
-          ;; (unpushed . show)
-          (unpulled . show)
-          ))
+  ;; 如果想获取 magit-section-initial-visibility-alist 值中具体某个类型名称，可 M-x magit-describe-section-briefly 获取。
+  ;; 比如想知道 Recent commits 这个版块的类型名称：
+  ;; 1. 光标在Recent commits上， M-x magit-describe-section-briefly RET ，得到 #<magit-section “@{upstream}…”
+  ;; [unpushed status] 372-935>，所以类型名称为 unpushed
+  ;; 2. 由此设置可使 “Recent commits” 和 “Unpulled from upstream” 在打开 magit-st时自动展开。
+  ;; (setq magit-section-initial-visibility-alist
+  ;;       '(
+  ;;         ;; (stashes . hide)
+  ;;         ;; (untracked . show)
+  ;;         ;; (unstaged . show)
+  ;;         ;; (unpushed . show)
+  ;;         (unpulled . show)    ; 需要手动按 f a 显示unpulled，然后才默认显示
+  ;;         ))
   )
 
 
