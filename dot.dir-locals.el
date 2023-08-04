@@ -7,26 +7,26 @@
 ;; (setq enable-local-variables :all)
 
 
-;; ((nil . (
-;;          (eval . (remove-hook 'c-mode-hook 'lsp))
-;;          (eval . (remove-hook 'c-mode-hook 'helm-gtags-mode))
-;;          (eval . (add-hook 'c-mode-hook 'helm-gtags-mode))
-;;          ;; 重新绑定被lsp占用的快捷键给helm-gtags
-;;          (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
-;;          (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
-;;          (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
-;;          )
-;;       ))
-
-
-;; tree-sitter中已经替换得c-mode的名字。这里也需要修改
 ((nil . (
-         (eval . (remove-hook 'c-ts-mode-hook 'lsp))
-         (eval . (remove-hook 'c-ts-mode-hook 'helm-gtags-mode))
-         (eval . (add-hook 'c-ts-mode-hook 'helm-gtags-mode))
+         (eval . (remove-hook 'c-mode-hook 'lsp))
+         (eval . (remove-hook 'c-mode-hook 'helm-gtags-mode))
+         (eval . (add-hook 'c-mode-hook 'helm-gtags-mode))
          ;; 重新绑定被lsp占用的快捷键给helm-gtags
          (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
          (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
          (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
          )
       ))
+
+
+;; ;; tree-sitter中已经替换得c-mode的名字。这里也需要修改
+;; ((nil . (
+;;          (eval . (remove-hook 'c-ts-mode-hook 'lsp))
+;;          (eval . (remove-hook 'c-ts-mode-hook 'helm-gtags-mode))
+;;          (eval . (add-hook 'c-ts-mode-hook 'helm-gtags-mode))
+;;          ;; 重新绑定被lsp占用的快捷键给helm-gtags
+;;          (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
+;;          (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
+;;          (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
+;;          )
+;;       ))
