@@ -661,6 +661,7 @@ when it inserts comment at the end of the line. "
 
 ;; tree-sitter 颜色模式
 ;; 只有c可以。rustic-mode照抄颜色全白
+;; 因为c mode修改了。.dir_locals也需要修改mode名字
 (define-derived-mode c-mode c-ts-mode "C")
 (dolist (ext '("\\.c\\'"))
   (setf auto-mode-alist (assoc-delete-all ext auto-mode-alist))
