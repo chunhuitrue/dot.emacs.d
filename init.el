@@ -659,13 +659,3 @@ when it inserts comment at the end of the line. "
 ;;   )
 
 
-;; ;; 放弃 tree-sitter 颜色模式。
-;; ;; 只有c可以。rustic-mode照抄颜色全白。会导致只能由一个.c文件开启lsp，
-;; ;; 再打开同一个项目下的，不开lsp
-;; ;; 因为c mode修改了。.dir_locals也需要修改mode名字
-;; (define-derived-mode c-mode c-ts-mode "C")
-;; (dolist (ext '("\\.c\\'"))
-;;   (setf auto-mode-alist (assoc-delete-all ext auto-mode-alist))
-;;   (add-to-list 'auto-mode-alist `(,ext . c-mode)))
-
-
