@@ -152,12 +152,6 @@ when it inserts comment at the end of the line. "
   )
 
 
-;; If your default face is a fixed pitch (monospace) face, but in AsciiDoc files you liked to have normal text with a variable pitch face, buffer-face-mode is for you: (add-hook 'adoc-mode-hook (lambda() (buffer-face-mode t)))
-(use-package adoc-mode
-  :ensure t
-  )
-
-
 (use-package yasnippet
   :ensure
   :delight yas-minor-mode
@@ -216,14 +210,6 @@ when it inserts comment at the end of the line. "
 
 (use-package flycheck
   :ensure
-  )
-
-
-(use-package json-mode
-  :ensure
-  :config
-  (add-hook 'json-mode-hook #'flycheck-mode)
-  (add-hook 'json-mode-hook #'company-mode)  
   )
 
 
@@ -299,6 +285,41 @@ when it inserts comment at the end of the line. "
   )
 
 
+;; If your default face is a fixed pitch (monospace) face, but in AsciiDoc files you liked to have normal text with a variable pitch face, buffer-face-mode is for you: (add-hook 'adoc-mode-hook (lambda() (buffer-face-mode t)))
+(use-package adoc-mode
+  :ensure t
+  )
+
+
+(use-package yaml-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+  (add-hook 'yaml-mode-hook
+            #'(lambda ()
+                (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+  )
+
+
+(use-package json-mode
+  :ensure
+  :config
+  (add-hook 'json-mode-hook #'flycheck-mode)
+  (add-hook 'json-mode-hook #'company-mode)  
+  )
+
+
+;; https://emacs-lsp.github.io/lsp-mode/page/lsp-lua-lsp/
+;; lsp-clients-lua-lsp-server-install-dir 可配 默认是~/.luarocks/bin/
+(use-package lua-mode
+  :ensure
+  :config
+  (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+  (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+  (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))  
+  )
+
+
 (use-package cc-mode
   :ensure
   :config (setq-default
@@ -316,7 +337,6 @@ when it inserts comment at the end of the line. "
   ;; 存盘时自动格式化。C-c C-c C-o 手动格式化一个buffer
   ;; (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)
   )
-
 
 ;; (defun rk/rustic-mode-hook ()
 ;;   ;; so that run C-c C-c C-r works without having to confirm, but don't try to
@@ -489,45 +509,35 @@ when it inserts comment at the end of the line. "
 ;; (add-hook 'c-mode-hook 'helm-gtags-mode)
 
 
-;; dap-mode
-(use-package exec-path-from-shell
-  :ensure
-  :init (exec-path-from-shell-initialize))
+;; ;; dap-mode
+;; ;; https://robert.kra.hn/posts/rust-emacs-setup/  https://www.jianshu.com/p/73ad87d0b88b 中文
+;; (use-package exec-path-from-shell
+;;   :ensure
+;;   :init (exec-path-from-shell-initialize))
 
-(when (executable-find "lldb-mi")
-  (use-package dap-mode
-    :ensure
-    :bind (:map dap-mode
-                ("C-c C-c h" . dap-hydra)
-                )
-    :config
-    (dap-ui-mode)
-    (dap-ui-controls-mode 1)
+;; (when (executable-find "lldb-mi")
+;;   (use-package dap-mode
+;;     :ensure
+;;     :bind (:map dap-mode
+;;                 ("C-c C-c h" . dap-hydra)
+;;                 )
+;;     :config
+;;     (dap-ui-mode)
+;;     (dap-ui-controls-mode 1)
 
-    (require 'dap-lldb)
-    (require 'dap-gdb-lldb)
-    ;; installs .extension/vscode
-    (dap-gdb-lldb-setup)
-    (dap-register-debug-template
-     "Rust::LLDB Run Configuration"
-     (list :type "lldb"
-           :request "launch"
-           :name "LLDB::Run"
-	       :gdbpath "rust-lldb"
-           ;; uncomment if lldb-mi is not in PATH
-           ;; :lldbmipath "path/to/lldb-mi"
-           ))))
-
-
-;; https://emacs-lsp.github.io/lsp-mode/page/lsp-lua-lsp/
-;; lsp-clients-lua-lsp-server-install-dir 可配 默认是~/.luarocks/bin/
-(use-package lua-mode
-  :ensure
-  :config
-  (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
-  (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
-  (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))  
-  )
+;;     (require 'dap-lldb)
+;;     (require 'dap-gdb-lldb)
+;;     ;; installs .extension/vscode
+;;     (dap-gdb-lldb-setup)
+;;     (dap-register-debug-template
+;;      "Rust::LLDB Run Configuration"
+;;      (list :type "lldb"
+;;            :request "launch"
+;;            :name "LLDB::Run"
+;; 	       :gdbpath "rust-lldb"
+;;            ;; uncomment if lldb-mi is not in PATH
+;;            ;; :lldbmipath "path/to/lldb-mi"
+;;            ))))
 
 
 ;; ssh中emacs copy的内容放到系统剪切板
@@ -536,16 +546,6 @@ when it inserts comment at the end of the line. "
 (use-package clipetty
   :ensure t
   :hook (after-init . global-clipetty-mode)
-  )
-
-
-(use-package yaml-mode
-  :ensure t
-  :config
-  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-  (add-hook 'yaml-mode-hook
-            #'(lambda ()
-                (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
   )
 
 
