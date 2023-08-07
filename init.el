@@ -253,12 +253,6 @@ when it inserts comment at the end of the line. "
   )
 
 
-(use-package helm-rg
-  :ensure
-  :config
-  (setq helm-rg-candidate-limit 2000)
-  )
-
 
 ;; https://github.com/bbatsov/helm-projectile
 ;; https://tuhdo.github.io/helm-projectile.html
@@ -658,4 +652,56 @@ when it inserts comment at the end of the line. "
 ;;   ;;         (buffer "*scratch*")))))
 ;;   )
 
+
+;; rg需要此包
+(use-package wgrep
+  :ensure
+  )
+
+
+;; https://github.com/dajva/rg.el
+;; https://rgel.readthedocs.io/en/latest/usage.html#results-buffer
+;; rgel-readthedocs-io-en-latest.pdf
+;; rg-menu C-c s
+;; https://github.com/dajva/rg.el
+;; https://rgel.readthedocs.io/en/latest/usage.html#results-buffer
+;; rgel-readthedocs-io-en-latest.pdf
+
+;; rg-menu C-c s 调出主菜单
+;; 路径文件名选项等，作为交互式选项可选
+;; C-c s t (rg-literal)       把搜索内容作为纯文本来搜索
+;; C-c s r (rg)               把搜索内容作为正则来搜索
+;; C-c s p (rg-project)       在项目内搜索。
+;; C-c s d (rg-dwim)          自动根据上下文条件的搜索
+
+;; 结果buffer移动
+;; M-n                 Move to next line with a match.
+;; M-p                 Move to previous line with a match.
+;; n                   Move to next line with a match, show that file in other buffer and highlight the match.
+;; p                   Move to previous line with a match, show that file in other buffer and highlight the match.
+;; M-N (rg-next-file)  Move to next file header if the results is grouped under a file header (See rg-group-result).
+;; M-P (rg-prev-file)  Move to previous file header if the results is grouped under a file header (See rg-group-result).
+
+;; 结果buff中重定义搜索
+;; d (rg-rerun-change-dir)     Interactively change search directory.
+;; f (rg-rerun-change-files)   Interactively change searched file types.
+;; t (rg-rerun-change-literal) Interactively change search string interpret the string literally.
+;; r (rg-rerun-change-regexp)  Interactively change search string interpret the string as a regular expression.
+;; g (rg-recompile)            Rerun the current search without changing any parameters.
+;; c (rg-rerun-toggle-case)    Toggle case sensitivity of search. The state of the flag is shown in the [case] header field.
+;; i (rg-rerun-toggle-ignore)  Toggle if ignore files are respected. The state of the flag is shown in the [ign] header field.
+;; m (rg-menu)                 Fire up the menu for full access to options and flags.
+
+;; 搜索历史
+;; C-c < (rg-back-history)     Navigate back in history.
+;; C-c > (rg-forward-history)  Navigate forward in history.
+
+;; 其他
+;; 搜索结果中按e可以编辑，C-c C-c应用到文件（但文件没保存）C-c C-k取消编辑
+;; 还可以保存编辑结果
+(use-package rg
+  :ensure
+  :config
+  (rg-enable-default-bindings)
+  )
 
