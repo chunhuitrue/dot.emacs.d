@@ -14,10 +14,10 @@
 (add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
-;; ;; elpa国内镜像
-;; ;; https://mirrors.tuna.tsinghua.edu.cn/help/elpa/
-;; (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-;;                          ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
+;; elpa国内镜像
+;; https://mirrors.tuna.tsinghua.edu.cn/help/elpa/
+(setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+                         ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
 
 (setq package-user-dir (expand-file-name "elpa/" user-emacs-directory))
 (package-initialize)
@@ -704,4 +704,17 @@ when it inserts comment at the end of the line. "
   :config
   (rg-enable-default-bindings)
   )
+
+
+;; ;; 查找项目下的文件，
+;; ;; https://github.com/redguardtoo/find-file-in-project#find-file-in-project-at-point
+;; ;; find-file-in-project
+;; ;; find-file-in-current-directory
+;; (use-package find-file-in-project
+;;   :ensure
+;;   :config
+;;   (helm-mode 1)
+;;   (setq ffip-use-rust-fd t)
+;;   )
+
 
