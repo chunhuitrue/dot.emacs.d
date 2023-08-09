@@ -706,7 +706,7 @@ when it inserts comment at the end of the line. "
   )
 
 
-;; ;; 查找项目下的文件，
+;; ;; 查找项目下的文件. 作为helm-projectile-find-file的备用
 ;; ;; https://github.com/redguardtoo/find-file-in-project#find-file-in-project-at-point
 ;; ;; find-file-in-project
 ;; ;; find-file-in-current-directory
