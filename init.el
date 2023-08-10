@@ -240,16 +240,17 @@ when it inserts comment at the end of the line. "
   (define-key global-map (kbd "C-c i") 'helm-semantic-or-imenu)  ; 当前buff中的符号
   (define-key global-map (kbd "C-c o") 'helm-occur)              ; 当前buff中查找关键字
   
-  ;; 让helm的窗口显示在下方
-  ;; ;; 固定选用 bottom 的窗口
+  ;; helm的窗口显示。
+  ;; 固定用 bottom 窗口
   ;; (add-to-list 'display-buffer-alist
   ;;              '("^\\*helm .*"
   ;;                (display-buffer-at-bottom)))
-  ;; 用 side window
+  ;; 固定用 side 窗口
   (add-to-list 'display-buffer-alist
                '("^\\*helm .*"
                  (display-buffer-in-side-window)
                  (side . bottom)))
+  
   )
 
 
@@ -717,4 +718,4 @@ when it inserts comment at the end of the line. "
 ;;   (setq ffip-use-rust-fd t)
 ;;   )
 
-
+  
