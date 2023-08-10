@@ -697,7 +697,7 @@ when it inserts comment at the end of the line. "
 ;; C-c > (rg-forward-history)  Navigate forward in history.
 
 ;; 其他
-;; 搜索结果中按e可以编辑，C-c C-c应用到文件（但文件没保存）C-c C-k取消编辑
+;; 搜索结果中按e可以编辑，C-c C-c应用到文件（没有保存命令，可以用C-x s统一保存所有buffer）C-c C-k取消编辑
 ;; 还可以保存编辑结果
 (use-package rg
   :ensure
