@@ -517,37 +517,36 @@ when it inserts comment at the end of the line. "
 ;; (add-hook 'c-mode-hook 'helm-gtags-mode)
 
 
-;; dap-mode 需要此包
-(use-package exec-path-from-shell
-  :ensure
-  :init (exec-path-from-shell-initialize))
+;; ;; dap-mode 需要此包
+;; (use-package exec-path-from-shell
+;;   :ensure
+;;   :init (exec-path-from-shell-initialize))
 
+;; ;; dap-mode
+;; ;; https://robert.kra.hn/posts/rust-emacs-setup/
+;; (when (executable-find "lldb-mi")
+;;   (use-package dap-mode
+;;     :ensure
+;;     :bind (:map dap-mode
+;;                 ("C-c C-c y" . dap-hydra)
+;;                 )
+;;     :config
+;;     (dap-ui-mode)
+;;     (dap-ui-controls-mode 1)
 
-;; dap-mode
-;; https://robert.kra.hn/posts/rust-emacs-setup/
-(when (executable-find "lldb-mi")
-  (use-package dap-mode
-    :ensure
-    :bind (:map dap-mode
-                ("C-c C-c y" . dap-hydra)
-                )
-    :config
-    (dap-ui-mode)
-    (dap-ui-controls-mode 1)
-
-    (require 'dap-lldb)
-    (require 'dap-gdb-lldb)
-    ;; installs .extension/vscode
-    (dap-gdb-lldb-setup)
-    (dap-register-debug-template
-     "Rust::LLDB Run Configuration"
-     (list :type "lldb"
-           :request "launch"
-           :name "LLDB::Run"
-	       :gdbpath "rust-lldb"
-           ;; uncomment if lldb-mi is not in PATH
-           ;; :lldbmipath "path/to/lldb-mi"
-           ))))
+;;     (require 'dap-lldb)
+;;     (require 'dap-gdb-lldb)
+;;     ;; installs .extension/vscode
+;;     (dap-gdb-lldb-setup)
+;;     (dap-register-debug-template
+;;      "Rust::LLDB Run Configuration"
+;;      (list :type "lldb"
+;;            :request "launch"
+;;            :name "LLDB::Run"
+;; 	       :gdbpath "rust-lldb"
+;;            ;; uncomment if lldb-mi is not in PATH
+;;            ;; :lldbmipath "path/to/lldb-mi"
+;;            ))))
 
 
 ;; ssh中emacs copy的内容放到系统剪切板
