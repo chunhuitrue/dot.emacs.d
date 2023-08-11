@@ -12,12 +12,25 @@
 (require 'package)
 (add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
-;; elpa国内镜像
-;; https://mirrors.tuna.tsinghua.edu.cn/help/elpa/
-(setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-                         ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
+;; 163镜像
+(setq package-archives '(("gnu"    . "http://mirrors.163.com/elpa/gnu/")
+                         ("nongnu" . "http://mirrors.163.com/elpa/nongnu/")
+                         ("melpa"  . "http://mirrors.163.com/elpa/melpa/")))
+
+;; 清华镜像
+(setq package-archives '(("gnu"    . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+                         ("nongnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/nongnu/")
+                         ("melpa"  . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
+
+;; 上海交大镜像
+(setq package-archives '(("gnu" . "http://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/gnu/")
+                         ("melpa" . "http://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/melpa/")))
+
+;; emacs-china镜像
+(setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+                         ("melpa" . "http://elpa.emacs-china.org/melpa/")))
 
 (setq package-user-dir (expand-file-name "elpa/" user-emacs-directory))
 (package-initialize)
@@ -511,12 +524,12 @@ when it inserts comment at the end of the line. "
 
 
 ;; dap-mode
-;; https://robert.kra.hn/posts/rust-emacs-setup/  https://www.jianshu.com/p/73ad87d0b88b 中文
+;; https://robert.kra.hn/posts/rust-emacs-setup/
 (when (executable-find "lldb-mi")
   (use-package dap-mode
     :ensure
     :bind (:map dap-mode
-                ("C-c C-c h" . dap-hydra)
+                ("C-c C-c y" . dap-hydra)
                 )
     :config
     (dap-ui-mode)
