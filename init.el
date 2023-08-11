@@ -732,5 +732,3 @@ when it inserts comment at the end of the line. "
 ;;   (helm-mode 1)
 ;;   (setq ffip-use-rust-fd t)
 ;;   )
-
-  
