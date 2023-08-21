@@ -1,7 +1,8 @@
 #!/bin/sh
 
 server=lch-server
-conf=/home/lch/.tmux.conf
+conf=~/.tmux.conf
+# conf=/home/lch/.tmux.conf
 session=OIO
 
 
