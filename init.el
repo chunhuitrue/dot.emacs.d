@@ -263,7 +263,6 @@ when it inserts comment at the end of the line. "
                '("^\\*helm .*"
                  (display-buffer-in-side-window)
                  (side . bottom)))
-  
   )
 
 
@@ -330,12 +329,23 @@ when it inserts comment at the end of the line. "
 
 (use-package cc-mode
   :ensure
-  :config (setq-default
-           indent-tabs-mode nil          ; indent. 用 tab: t  用空格: nil
-           tab-width 4                   ; tab宽度
-           c-basic-offset 4              ; 缩进的基本单位，2字符，4字符等
-           c-default-style "linux"       ; c 缩进风格. M-x c-set-style 选择当前文件的风格
-           )
+  :config
+  (add-hook 'c-mode-common-hook 
+            (lambda ()
+              (setq indent-tabs-mode nil)
+              (setq tab-width 4)
+              (setq default-tab-width 4)
+              (setq c-basic-offset 4)
+              (setq c-default-style "linux")
+              ))
+  
+  ;; ;; 这个设置不生效了, emacs29会覆盖这个配置成tab缩进
+  ;; (setq-default
+  ;;          indent-tabs-mode nil          ; indent. 用 tab: t  用空格: nil
+  ;;          tab-width 4                   ; tab宽度
+  ;;          c-basic-offset 4              ; 缩进的基本单位，2字符，4字符等
+  ;;          c-default-style "linux"       ; c 缩进风格. M-x c-set-style 选择当前文件的风格
+  ;;          )
   )
 
 
