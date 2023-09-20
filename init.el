@@ -330,7 +330,7 @@ when it inserts comment at the end of the line. "
 (use-package cc-mode
   :ensure
   :config
-  (add-hook 'c-mode-common-hook 
+  (add-hook 'c-mode-common-hook
             (lambda ()
               (setq indent-tabs-mode nil)
               (setq tab-width 4)
@@ -338,7 +338,7 @@ when it inserts comment at the end of the line. "
               (setq c-basic-offset 4)
               (setq c-default-style "linux")
               ))
-  
+
   ;; ;; 这个设置不生效了, emacs29会覆盖这个配置成tab缩进
   ;; (setq-default
   ;;          indent-tabs-mode nil          ; indent. 用 tab: t  用空格: nil
