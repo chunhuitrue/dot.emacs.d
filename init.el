@@ -55,6 +55,10 @@
 (electric-pair-mode t)
 ;; (setq word-wrap-by-category t)             ;按照中文折行
 
+;; 全局的默认缩进
+(setq tab-width 4)
+(setq default-tab-width 4)
+
 
 (which-function-mode t)
 ;; ;; 让函数命显示在buffer行首。see：lsp-headerline-breadcrumb-enable
@@ -330,22 +334,12 @@ when it inserts comment at the end of the line. "
 (use-package cc-mode
   :ensure
   :config
-  (add-hook 'c-mode-common-hook
+  (add-hook 'c-mode-common-hook		; 缩进
             (lambda ()
               (setq indent-tabs-mode nil)
-              (setq tab-width 4)
-              (setq default-tab-width 4)
               (setq c-basic-offset 4)
               (setq c-default-style "linux")
               ))
-
-  ;; ;; 这个设置不生效了, emacs29会覆盖这个配置成tab缩进
-  ;; (setq-default
-  ;;          indent-tabs-mode nil          ; indent. 用 tab: t  用空格: nil
-  ;;          tab-width 4                   ; tab宽度
-  ;;          c-basic-offset 4              ; 缩进的基本单位，2字符，4字符等
-  ;;          c-default-style "linux"       ; c 缩进风格. M-x c-set-style 选择当前文件的风格
-  ;;          )
   )
 
 
@@ -354,6 +348,12 @@ when it inserts comment at the end of the line. "
   :config
   ;; 存盘时自动格式化。C-c C-c C-o 手动格式化一个buffer
   ;; (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)
+
+  (add-hook 'rustic-mode-hook 		; 缩进
+            (lambda ()
+              (setq indent-tabs-mode nil)
+              (setq rust-indent-offset 4)
+	      ))
   )
 
 ;; (defun rk/rustic-mode-hook ()
