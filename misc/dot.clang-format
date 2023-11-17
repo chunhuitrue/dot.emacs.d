@@ -11,7 +11,6 @@ BasedOnStyle: LLVM
 ColumnLimit: 120
 AllowShortFunctionsOnASingleLine: InlineOnly
 AlignEscapedNewlines: Left
-AlignConsecutiveMacros: Consecutive
 IndentPPDirectives: AfterHash
 IndentWidth: 4
 PointerAlignment: Right
@@ -38,7 +37,7 @@ BraceWrapping:
 TabWidth: 4
 UseTab: Never
 
-AlignConsecutiveDeclarations: true
+# 宏定义对齐
 AlignConsecutiveMacros: true
 
 AllowShortFunctionsOnASingleLine: Empty
