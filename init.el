@@ -6,7 +6,7 @@
 (setq user-init-file (or load-file-name (buffer-file-name)))
 (setq user-emacs-directory (file-name-directory user-init-file))
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp") 
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp")
 
 
 (require 'package)
@@ -87,6 +87,19 @@
 ;; (setq auto-save-default nil)
 ;; (setq undo-tree-auto-save-history nil)
 
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-save-master")
+(require 'auto-save)
+(auto-save-enable)
+(setq auto-save-silent t)   ; quietly save
+(setq auto-save-delete-trailing-whitespace t)  ; automatically delete spaces at the end of the line when saving
+;; ;;; custom predicates if you don't want auto save.
+;; ;;; disable auto save mode when current filetype is an gpg file.
+;;   (setq auto-save-disable-predicates
+;; 	'((lambda ()
+;; 	    (string-suffix-p
+;; 	     "gpg"
+;; 	     (file-name-extension (buffer-name)) t))))
+
 
 ;; 自动备份
 (setq make-backup-files nil)
@@ -137,13 +150,13 @@ when it inserts comment at the end of the line. "
   ;; (delight 'abbrev-mode " Abv" "abbrev") ; 替换显示的字符串
   (delight 'abbrev-mode nil "abbrev")
   (delight 'eldoc-mode nil "ElDoc")
-  (delight 'ivy-mode nil "ivy")  
+  (delight 'ivy-mode nil "ivy")
   )
 
 
 (use-package which-key
   :ensure
-  :delight which-key-mode  
+  :delight which-key-mode
   :init
   (which-key-mode))
 
@@ -256,7 +269,7 @@ when it inserts comment at the end of the line. "
   (define-key global-map (kbd "M-y") 'helm-show-kill-ring)
   (define-key global-map (kbd "C-c i") 'helm-semantic-or-imenu)  ; 当前buff中的符号
   (define-key global-map (kbd "C-c o") 'helm-occur)              ; 当前buff中查找关键字
-  
+
   ;; helm的窗口显示。
   ;; 固定用 bottom 窗口
   ;; (add-to-list 'display-buffer-alist
@@ -316,7 +329,7 @@ when it inserts comment at the end of the line. "
   :ensure
   :config
   (add-hook 'json-mode-hook #'flycheck-mode)
-  (add-hook 'json-mode-hook #'company-mode)  
+  (add-hook 'json-mode-hook #'company-mode)
   )
 
 
@@ -327,7 +340,7 @@ when it inserts comment at the end of the line. "
   :config
   (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
   (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
-  (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))  
+  (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
   )
 
 
@@ -396,7 +409,7 @@ when it inserts comment at the end of the line. "
 
 (use-package helm-gtags
   :ensure
-  :delight helm-gtags-mode  
+  :delight helm-gtags-mode
   :config
   (with-eval-after-load 'helm-gtags
     (setq helm-gtags-path-style 'relative)
@@ -458,18 +471,18 @@ when it inserts comment at the end of the line. "
   (lsp-rust-analyzer-display-reborrow-hints nil)
   :bind (:map lsp-mode-map
               ;; 跳到定义  M-.  xref-find-definitions
-              ;; 返回      M-,  xref-pop-marker-stack              
+              ;; 返回      M-,  xref-pop-marker-stack
               ("M-r" . lsp-find-references)
               ("M-j" . lsp-ui-imenu)                    ; 当前buff内的符号。没有模糊查找 helm-semantic-or-imenu 或 helm-imenu 更好.
               ("C-c C-c S" . lsp-treemacs-symbols)      ; 当前buff内的符号。没模糊查找。
               ("C-c x i" . helm-lsp-workspace-symbol)   ; 整个项目的符号。
-              
+
               ("C-c C-c g" . lsp-find-definition)      ; 同 M-.
               ("C-c C-c d" . lsp-find-declaration)     ; 同 M-.
               ("C-c C-c t" . lsp-find-type-definition) ; 同 M-.
               ("C-c C-c i" . lsp-find-implementation)
               ("C-c C-c h" . lsp-treemacs-call-hierarchy)  ; 显示函数调用级别
-              
+
               ("C-c C-p r" . lsp-ui-peek-find-references)
               ("C-c C-p d" . lsp-ui-peek-find-definitions)   ; 同 M-.
               ("C-c C-p i" . lsp-ui-peek-find-implementation)
@@ -478,7 +491,7 @@ when it inserts comment at the end of the line. "
               ("C-c C-c l" . flycheck-list-errors)
               ("C-c C-c r" . lsp-rename)
               ("C-c C-c a" . lsp-execute-code-action)
-              
+
               ("C-c C-c p" . lsp-describe-thing-at-point)
               ("C-c C-c u" . lsp-ui-doc-glance)
               ("C-c C-c s" . lsp-rust-analyzer-status)
@@ -665,7 +678,7 @@ when it inserts comment at the end of the line. "
 ;;   (global-set-key (kbd "C-c V") 'ivy-pop-view)
 ;;   (setq ivy-use-virtual-buffers t)      ; ivy-switch-buffer可以切换recentf, bookmarks, windows layout
 ;;   ;; ;; 设置默认的layout
-;;   ;; ;; https://oremacs.com/2016/06/27/ivy-push-view/  
+;;   ;; ;; https://oremacs.com/2016/06/27/ivy-push-view/
 ;;   ;; (setq ivy-views
 ;;   ;;     `(("dutch + notes {}"
 ;;   ;;        (vert
