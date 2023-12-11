@@ -6,7 +6,7 @@
 (setq user-init-file (or load-file-name (buffer-file-name)))
 (setq user-emacs-directory (file-name-directory user-init-file))
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp")
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
 
 
 (require 'package)
@@ -87,7 +87,7 @@
 ;; (setq auto-save-default nil)
 ;; (setq undo-tree-auto-save-history nil)
 
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/auto-save-master")
+;; ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/auto-save-master")
 ;; (require 'auto-save)
 ;; (auto-save-enable)
 ;; (setq auto-save-silent t)   ; quietly save
