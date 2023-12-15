@@ -154,6 +154,11 @@ when it inserts comment at the end of the line. "
   )
 
 
+;; mode-line
+;; 不显示git分支名
+(setq mode-line-format (delete '(vc-mode vc-mode) mode-line-format))
+
+
 (use-package which-key
   :ensure
   :delight which-key-mode
