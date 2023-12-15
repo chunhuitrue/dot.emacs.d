@@ -157,8 +157,8 @@ when it inserts comment at the end of the line. "
 ;; mode-line
 ;; 不显示git分支名
 (setq mode-line-format (delete '(vc-mode vc-mode) mode-line-format))
-;; 不显示frame信息
-;; (setq-default mode-line-format (remove 'mode-line-frame-identification mode-line-format))
+;; 不显示frame信息 -UUU:**-  F1  init.el 中的 F1
+(setq-default mode-line-format (remove 'mode-line-frame-identification mode-line-format))
 
 
 (use-package which-key
