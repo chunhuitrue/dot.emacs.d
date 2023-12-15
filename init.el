@@ -179,7 +179,7 @@ when it inserts comment at the end of the line. "
 	       '(:eval `(vc-mode vc-mode))
                "  "
                '(:eval (dotemacs-buffer-encoding-abbrev))
-               "  "	       
+               "  "
 	       mode-line-end-spaces
                ))
 
