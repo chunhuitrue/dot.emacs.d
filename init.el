@@ -155,10 +155,33 @@ when it inserts comment at the end of the line. "
 
 
 ;; mode-line
-;; 不显示git分支名
-(setq mode-line-format (delete '(vc-mode vc-mode) mode-line-format))
-;; 不显示frame信息 -UUU:**-  F1  init.el 中的 F1
-(setq-default mode-line-format (remove 'mode-line-frame-identification mode-line-format))
+(defun dotemacs-buffer-encoding-abbrev ()
+  "The line ending convention used in the buffer."
+  (let ((buf-coding (format "%s" buffer-file-coding-system)))
+    (if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
+        (match-string 1 buf-coding)
+      buf-coding)))
+
+(setq-default mode-line-format
+              (list
+               "%e"
+	       mode-line-front-space
+	       mode-line-mule-info
+	       mode-line-client
+	       mode-line-modified
+	       mode-line-remote
+	       ;; mode-line-frame-identification  ; 不显示frame信息 -UUU:**-  F1  init.el 中的 F1
+	       "  "
+	       mode-line-buffer-identification
+	       mode-line-position
+	       mode-line-misc-info
+	       mode-line-modes
+	       '(:eval `(vc-mode vc-mode))
+               "  "
+               '(:eval (dotemacs-buffer-encoding-abbrev))
+               "  "	       
+	       mode-line-end-spaces
+               ))
 
 
 (use-package which-key
@@ -761,3 +784,5 @@ when it inserts comment at the end of the line. "
 ;;   (helm-mode 1)
 ;;   (setq ffip-use-rust-fd t)
 ;;   )
+
+
