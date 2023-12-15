@@ -177,9 +177,9 @@ when it inserts comment at the end of the line. "
 	       mode-line-misc-info
 	       mode-line-modes
 	       '(:eval `(vc-mode vc-mode))
-               "  "
-               '(:eval (dotemacs-buffer-encoding-abbrev))
-               "  "
+               ;; "  "
+               ;; '(:eval (dotemacs-buffer-encoding-abbrev)) ; 默认已经在文件名前面有显示：-UUU(DOS)@---  新建文本文档.txt
+               ;; "  "
 	       mode-line-end-spaces
                ))
 
