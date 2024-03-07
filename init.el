@@ -787,3 +787,17 @@ when it inserts comment at the end of the line. "
 ;;   )
 
 
+;; mode-line颜色
+(set-face-attribute 'mode-line nil
+                    ;; :foreground "black" 
+                    :background "SeaGreen"
+                    ;; :background "DarkOliveGreen"
+                    ;; :background "#32CD32" ; 不太亮的绿色
+                    ;; :background "LimeGreen" ; 不太亮的绿色
+                    ;; :background "#5F8787" ; 暗青色
+                    ;; :background "CadetBlue" ;  暗青色
+                    )
+;; (set-face-attribute 'mode-line-inactive nil
+;;                     :foreground "black"
+;;                     :background "light gray"
+;;                     )
