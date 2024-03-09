@@ -184,6 +184,21 @@ when it inserts comment at the end of the line. "
 	       mode-line-end-spaces
                ))
 
+;; mode-line颜色和tmux状态栏一致
+(set-face-attribute 'mode-line nil
+                    ;; :foreground "black" 
+                    :background "SeaGreen"
+                    ;; :background "DarkOliveGreen"
+                    ;; :background "#32CD32" ; 不太亮的绿色
+                    ;; :background "LimeGreen" ; 不太亮的绿色
+                    ;; :background "#5F8787" ; 暗青色
+                    ;; :background "CadetBlue" ;  暗青色
+                    )
+;; (set-face-attribute 'mode-line-inactive nil
+;;                     :foreground "black"
+;;                     :background "light gray"
+;;                     )
+
 
 (use-package which-key
   :ensure
@@ -603,13 +618,30 @@ when it inserts comment at the end of the line. "
 ;;            ))))
 
 
-;; ssh中emacs copy的内容放到系统剪切板
+;; 远程ssh中emacs copy的内容放到系统剪切板
 ;; mac下不需要tmux配合其他配置
 ;; https://github.com/spudlyo/clipetty
 (use-package clipetty
   :ensure t
   :hook (after-init . global-clipetty-mode)
   )
+
+;; 解决问题：macos在本地tmux中的emacs，copy的内容无法放到系统剪切板
+;; 需要支持： brew install reattach-to-user-namespace
+(when (eq system-type 'darwin) 
+  (defun copy-from-osx ()
+    "Use OSX clipboard to paste."
+    (shell-command-to-string "reattach-to-user-namespace pbpaste"))
+
+  (defun paste-to-osx (text &optional push)
+    "Add kill ring entries (TEXT) to OSX clipboard.  PUSH."
+    (let ((process-connection-type nil))
+      (let ((proc (start-process "pbcopy" "*Messages*" "reattach-to-user-namespace" "pbcopy")))
+	(process-send-string proc text)
+	(process-send-eof proc))))
+
+  (setq interprogram-cut-function 'paste-to-osx)
+  (setq interprogram-paste-function 'copy-from-osx))
 
 
 ;; window layout布局,tabbar方式:
@@ -787,17 +819,8 @@ when it inserts comment at the end of the line. "
 ;;   )
 
 
-;; mode-line颜色
-(set-face-attribute 'mode-line nil
-                    ;; :foreground "black" 
-                    :background "SeaGreen"
-                    ;; :background "DarkOliveGreen"
-                    ;; :background "#32CD32" ; 不太亮的绿色
-                    ;; :background "LimeGreen" ; 不太亮的绿色
-                    ;; :background "#5F8787" ; 暗青色
-                    ;; :background "CadetBlue" ;  暗青色
-                    )
-;; (set-face-attribute 'mode-line-inactive nil
-;;                     :foreground "black"
-;;                     :background "light gray"
-;;                     )
+
+
+
+
+
