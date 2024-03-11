@@ -68,6 +68,10 @@
 ;;             ;; We remove Which Function Mode from the mode line, because it's mostly
 ;;             ;; invisible here anyway.
 ;;       (assq-delete-all 'which-func-mode mode-line-misc-info))
+;; mode-line上函数名的颜色
+(set-face-attribute 'which-func nil  
+                    :foreground "orange")
+
 
 
 ;; 平滑地进行半屏滚动，避免滚动后recenter操作
@@ -817,10 +821,4 @@ when it inserts comment at the end of the line. "
 ;;   (helm-mode 1)
 ;;   (setq ffip-use-rust-fd t)
 ;;   )
-
-
-
-
-
-
 
