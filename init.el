@@ -171,6 +171,9 @@ when it inserts comment at the end of the line. "
 ;;         (match-string 1 buf-coding)
 ;;       buf-coding)))
 
+(setq-default mode-line-position
+              '("%p (%l,%c)"))
+
 (setq-default mode-line-format
               (list
                "%e"			; 当emacs资源不足的时候，会提示信息
@@ -184,6 +187,7 @@ when it inserts comment at the end of the line. "
 	       mode-line-buffer-identification
 	       "  "
 	       mode-line-position
+	       "  "
 	       mode-line-misc-info
 	       mode-line-modes
 	       '(:eval `(vc-mode vc-mode))
