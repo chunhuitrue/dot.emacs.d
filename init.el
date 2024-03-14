@@ -10,7 +10,7 @@
 
 
 (require 'package)
-(add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("gnu"   . "http://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
@@ -845,3 +845,12 @@ when it inserts comment at the end of the line. "
           (not (eq 'font-lock-string-face
                    (get-text-property end 'face)))))
   )
+
+;; (require 'ws-butler)
+;; (add-hook 'prog-mode-hook #'ws-butler-mode)
+;; (setq ws-butler-global-exempt-modes '(special-mode))
+;; (setq ws-butler-keep-whitespace-before-point nil)
+;; (setq ws-butler-trim-predicate
+;;       (lambda (beg end)
+;;         (not (eq 'font-lock-string-face
+;;                  (get-text-property end 'face)))))
