@@ -828,3 +828,20 @@ when it inserts comment at the end of the line. "
 ;;   (setq ffip-use-rust-fd t)
 ;;   )
 
+
+;; 自动删除行尾空格
+;; https://github.com/lewang/ws-butler
+(use-package ws-butler
+  :ensure t
+  :hook (
+	 ;; (text-mode . ws-butler-mode)
+         (prog-mode . ws-butler-mode)
+	 )
+  :config
+  (setq ws-butler-global-exempt-modes '(special-mode))
+  (setq ws-butler-keep-whitespace-before-point nil)
+  (setq ws-butler-trim-predicate
+	(lambda (beg end)
+          (not (eq 'font-lock-string-face
+                   (get-text-property end 'face)))))
+  )
