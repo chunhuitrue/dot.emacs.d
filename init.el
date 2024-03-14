@@ -68,9 +68,14 @@
 ;;             ;; We remove Which Function Mode from the mode line, because it's mostly
 ;;             ;; invisible here anyway.
 ;;       (assq-delete-all 'which-func-mode mode-line-misc-info))
+
 ;; mode-line上函数名的颜色
+;; 和mode-line上其他文字默认的设置一致。which-function-mode会设置成蓝色
 (set-face-attribute 'which-func nil  
-                    :foreground "orange")
+                    :foreground "#2e3436")
+;; 继承默认。
+;; (set-face-attribute 'which-func nil
+;;                     :foreground nil)  
 
 
 
@@ -290,6 +295,7 @@ when it inserts comment at the end of the line. "
 
 (use-package flycheck
   :ensure
+  :delight flycheck-mode  ; 不在mode-line上显示警告数量，lsp已经显示了
   )
 
 
