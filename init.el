@@ -61,6 +61,7 @@
 
 
 (which-function-mode t)
+(setq which-func-idle-delay 0.1)
 ;; ;; 让函数命显示在buffer行首。see：lsp-headerline-breadcrumb-enable
 ;; (setq-default header-line-format
 ;;               '((which-func-mode ("" which-func-format " "))))
@@ -511,7 +512,7 @@ when it inserts comment at the end of the line. "
   :commands lsp
   :custom
   (lsp-eldoc-render-all nil) ; 自动在minibuf显示函数的文档打扰太多，关闭。
-  (lsp-idle-delay 0.5)
+  (lsp-idle-delay 0.1)
   (gc-cons-threshold (* 100 1024 1024))
   (read-process-output-max (* 1024 1024))
   (treemacs-space-between-root-nodes nil)
