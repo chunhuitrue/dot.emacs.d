@@ -28,9 +28,9 @@
 (setq package-archives '(("gnu" . "http://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/gnu/")
                          ("melpa" . "http://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/melpa/")))
 
-;; emacs-china镜像
-(setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-                         ("melpa" . "http://elpa.emacs-china.org/melpa/")))
+;; ;; emacs-china镜像
+;; (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+;;                          ("melpa" . "http://elpa.emacs-china.org/melpa/")))
 
 (setq package-user-dir (expand-file-name "elpa/" user-emacs-directory))
 (package-initialize)
