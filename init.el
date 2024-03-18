@@ -423,11 +423,32 @@ when it inserts comment at the end of the line. "
   ;; 存盘时自动格式化。C-c C-c C-o 手动格式化一个buffer
   ;; (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)
 
-  (add-hook 'rustic-mode-hook 		; 缩进
+  (add-hook 'rustic-mode-hook 		; 缩进固定用4个空格
             (lambda ()
               (setq indent-tabs-mode nil)
               (setq rust-indent-offset 4)
 	      ))
+
+  ;; ;; 编译buffer字体颜色
+  ;; (custom-set-faces
+  ;;  ;; '(rustic-compilation-column ((t (:inherit compilation-column-number))))
+  ;;  ;; '(rustic-compilation-line ((t (:foreground "LimeGreen"))))
+  ;;  ;; '(rustic-message ((t (:foreground "LimeGreen"))))
+  ;;  ;; '(rustic-compilation-error ((t (:foreground "red"))))
+  ;;  ;; '(rustic-compilation-warning ((t (:foreground "LimeGreen"))))
+  ;;  ;; '(rustic-compilation-info ((t (:foreground "LimeGreen"))))
+  ;;  )
+
+  ;; 重新定义C-c C-c k  clippy 和 C-c C-c C-u build。编译结果buffer的颜色，否则提示特定行的蓝色看不清
+  ;; 默认：https://github.com/brotzeit/rustic/blob/master/rustic-compile.el#L118
+  (setq rustic-ansi-faces ["black"
+                           "red2"
+                           "green3"
+                           "yellow3"
+                           "cyan2"
+                           "magenta3"
+                           "cyan3"
+                           "white"])
   )
 
 ;; (defun rk/rustic-mode-hook ()
