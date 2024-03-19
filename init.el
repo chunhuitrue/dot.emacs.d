@@ -324,8 +324,7 @@ when it inserts comment at the end of the line. "
   ;; transient弹出窗口的key颜色
   (custom-set-faces
    '(transient-key-exit ((((type tty)) (:foreground "#d1478e")))) ; 默认的粉色看不清
-   '(transient-key-stay ((((type tty)) (:foreground "green")))) ; 和上面的标题颜色一致
-   ;; '(transient-key-stay ((((type tty)) (:foreground "#b4fa70")))) ; 和上面的标题颜色一致
+   '(transient-key-stay ((((type tty)) (:foreground "green"))))
    )
   )
 
