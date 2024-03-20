@@ -420,14 +420,24 @@ when it inserts comment at the end of the line. "
               (setq c-basic-offset 4)
               (setq c-default-style "linux")
               ))
+
+  ;; 如果系统中没有安装clangd，或者虽然安装了clangd，但是项目无法编译。
+  ;; 就不用lsp-mode来索引和扩展。否则会导致索引跳转的快捷键不可用.
+  ;; 另外一个办法是在项目目录下放入.dir-locals.el
+  (if (executable-find "clangd")
+      (add-hook 'c-mode-hook 'lsp)
+    (add-hook 'c-mode-hook 'helm-gtags-mode)
+    )
+  ;; ;; 同时用两种模式
+  ;; (add-hook 'c-mode-hook 'lsp)
+  ;; (add-hook 'c-mode-hook 'helm-gtags-mode)
   )
 
 
 (use-package rustic
   :ensure
   :config
-  ;; 存盘时自动格式化。C-c C-c C-o 手动格式化一个buffer
-  ;; (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)
+  (add-hook 'rustic-mode-hook 'lsp)
 
   (add-hook 'rustic-mode-hook 		; 缩进固定用4个空格
             (lambda ()
@@ -455,16 +465,19 @@ when it inserts comment at the end of the line. "
                            "magenta3"
                            "cyan3"
                            "white"])
-  )
 
-;; (defun rk/rustic-mode-hook ()
-;;   ;; so that run C-c C-c C-r works without having to confirm, but don't try to
-;;   ;; save rust buffers that are not file visiting. Once
-;;   ;; https://github.com/brotzeit/rustic/issues/253 has been resolved this should
-;;   ;; no longer be necessary.
-;;   (when buffer-file-name
-;;     (setq-local buffer-save-without-query t))
-;;   (add-hook 'before-save-hook 'lsp-format-buffer nil t))
+  ;; 存盘时自动格式化。C-c C-c C-o 手动格式化一个buffer
+  ;; (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)
+
+  ;; (defun rk/rustic-mode-hook ()
+  ;;   ;; so that run C-c C-c C-r works without having to confirm, but don't try to
+  ;;   ;; save rust buffers that are not file visiting. Once
+  ;;   ;; https://github.com/brotzeit/rustic/issues/253 has been resolved this should
+  ;;   ;; no longer be necessary.
+  ;;   (when buffer-file-name
+  ;;     (setq-local buffer-save-without-query t))
+  ;;   (add-hook 'before-save-hook 'lsp-format-buffer nil t))
+  )
 
 
 (use-package toml-mode
@@ -599,7 +612,6 @@ when it inserts comment at the end of the line. "
   ;; (setq lsp-enable-indentation nil)                      ; 关闭lsp的indent.目录下用.clang_format
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
-  (add-hook 'rustic-mode-hook 'lsp)
   )
 
 
@@ -614,18 +626,6 @@ when it inserts comment at the end of the line. "
 
 
 (use-package lsp-treemacs :ensure)
-
-
-;; 如果系统中没有安装clangd，或者虽然安装了clangd，但是项目无法编译。就不用lsp-mode来索引和扩展。否则会导致索引跳转的快捷键不可用.
-;; 另外一个办法是在项目目录下放入.dir-locals.el
-(if (executable-find "clangd")
-    (add-hook 'c-mode-hook 'lsp)
-  (add-hook 'c-mode-hook 'helm-gtags-mode)
-  )
-
-;; ;; 同时用两种模式
-;; (add-hook 'c-mode-hook 'lsp)
-;; (add-hook 'c-mode-hook 'helm-gtags-mode)
 
 
 ;; ;; dap-mode 需要此包
