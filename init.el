@@ -466,17 +466,18 @@ when it inserts comment at the end of the line. "
                            "cyan3"
                            "white"])
 
-  ;; 存盘时自动格式化。C-c C-c C-o 手动格式化一个buffer
-  ;; (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)
-
-  ;; (defun rk/rustic-mode-hook ()
-  ;;   ;; so that run C-c C-c C-r works without having to confirm, but don't try to
-  ;;   ;; save rust buffers that are not file visiting. Once
-  ;;   ;; https://github.com/brotzeit/rustic/issues/253 has been resolved this should
-  ;;   ;; no longer be necessary.
-  ;;   (when buffer-file-name
-  ;;     (setq-local buffer-save-without-query t))
-  ;;   (add-hook 'before-save-hook 'lsp-format-buffer nil t))
+  ;; 存盘时自动格式化。
+  ;; 并且重构代码的时候，不需要提示保存
+  ;; 也可以C-c C-c C-o 手动格式化一个buffer
+  (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)
+  (defun rk/rustic-mode-hook ()
+    ;; so that run C-c C-c C-r works without having to confirm, but don't try to
+    ;; save rust buffers that are not file visiting. Once
+    ;; https://github.com/brotzeit/rustic/issues/253 has been resolved this should
+    ;; no longer be necessary.
+    (when buffer-file-name
+      (setq-local buffer-save-without-query t))
+    (add-hook 'before-save-hook 'lsp-format-buffer nil t))
   )
 
 
