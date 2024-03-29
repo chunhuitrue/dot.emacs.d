@@ -229,17 +229,21 @@ when it inserts comment at the end of the line. "
   )
 
 
-;; "C-c SPC" ==> ace-jump-word-mode
-;; enter first character of a word, select the highlighted key to move to it.
-;; "C-u C-c SPC" ==> ace-jump-char-mode
-;; enter a character for query, select the highlighted key to move to it.
-;; "C-u C-u C-c SPC" ==> ace-jump-line-mode
-;; each non-empty line will be marked, select the highlighted key to move to it.
-(use-package ace-jump-mode
-  :ensure t
-  :config
-  (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-  )
+;; ;; "C-c SPC" ==> ace-jump-word-mode
+;; ;; enter first character of a word, select the highlighted key to move to it.
+;; ;; "C-u C-c SPC" ==> ace-jump-char-mode
+;; ;; enter a character for query, select the highlighted key to move to it.
+;; ;; "C-u C-u C-c SPC" ==> ace-jump-line-mode
+;; ;; each non-empty line will be marked, select the highlighted key to move to it.
+;; (use-package ace-jump-mode
+;;   :ensure t
+;;   :config
+;;   (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+;;   )
+
+
+(define-key global-map (kbd "C-c SPC") 'avy-goto-word-1)
+(define-key global-map (kbd "C-c g") 'avy-goto-line)
 
 
 (use-package yasnippet
