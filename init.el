@@ -121,6 +121,10 @@
 (define-key global-map (kbd "M-n") 'forward-paragraph)
 (define-key global-map (kbd "C-x C-a") 'align)
 
+(define-key global-map (kbd "M-g M-g") 'avy-goto-word-1)
+(define-key global-map (kbd "M-g l") 'avy-goto-line)
+(define-key global-map (kbd "M-g c") 'avy-goto-word-0)
+
 
 (setq comment-style 'extra-line)       ;多行注释
 ;; (define-key global-map (kbd "M-;") 'comment-line)     ; 多行注释
@@ -228,22 +232,6 @@ when it inserts comment at the end of the line. "
   (golden-ratio-mode)
   )
 
-
-;; ;; "C-c SPC" ==> ace-jump-word-mode
-;; ;; enter first character of a word, select the highlighted key to move to it.
-;; ;; "C-u C-c SPC" ==> ace-jump-char-mode
-;; ;; enter a character for query, select the highlighted key to move to it.
-;; ;; "C-u C-u C-c SPC" ==> ace-jump-line-mode
-;; ;; each non-empty line will be marked, select the highlighted key to move to it.
-;; (use-package ace-jump-mode
-;;   :ensure t
-;;   :config
-;;   (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-;;   )
-
-
-(define-key global-map (kbd "C-c SPC") 'avy-goto-word-1)
-(define-key global-map (kbd "C-c g") 'avy-goto-line)
 
 
 (use-package yasnippet
