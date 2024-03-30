@@ -117,14 +117,13 @@
 
 
 (define-key global-map (kbd "M-o") 'other-window)
+(define-key global-map (kbd "C-x o") 'ace-window)
 (define-key global-map (kbd "M-p") 'backward-paragraph) ; 跳到段落空行
 (define-key global-map (kbd "M-n") 'forward-paragraph)
-(define-key global-map (kbd "C-x C-a") 'align)
-
 (define-key global-map (kbd "M-g M-g") 'avy-goto-word-1)
 (define-key global-map (kbd "M-g l") 'avy-goto-line)
 (define-key global-map (kbd "M-g c") 'avy-goto-word-0)
-
+(define-key global-map (kbd "C-x C-a") 'align)
 
 (setq comment-style 'extra-line)       ;多行注释
 ;; (define-key global-map (kbd "M-;") 'comment-line)     ; 多行注释
