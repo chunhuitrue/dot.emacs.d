@@ -229,6 +229,12 @@ when it inserts comment at the end of the line. "
   :delight golden-ratio-mode
   :init
   (golden-ratio-mode)
+  :config
+  ;; ace-window用编号切换窗口后，激活光标所在窗口的golden-ratio
+  ;; 使其按比例放大
+  (defadvice ace-window (after my-ace-window-advice activate)
+    "Call golden-ratio after ace-window."
+    (golden-ratio))
   )
 
 
