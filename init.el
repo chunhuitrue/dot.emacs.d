@@ -174,10 +174,9 @@ when it inserts comment at the end of the line. "
 ;;     (if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
 ;;         (match-string 1 buf-coding)
 ;;       buf-coding)))
-
+(setq auto-revert-mode-text "")		; 不显示auto-revert-mode模式标记: ARev
 (setq-default mode-line-position
               '("%p (%l,%c)"))
-
 (setq-default mode-line-format
               (list
                "%e"			; 当emacs资源不足的时候，会提示信息
@@ -200,7 +199,6 @@ when it inserts comment at the end of the line. "
                "  "
 	       mode-line-end-spaces
                ))
-
 ;; mode-line颜色和tmux状态栏一致
 (set-face-attribute 'mode-line nil
                     ;; :foreground "black" 
