@@ -625,7 +625,7 @@ when it inserts comment at the end of the line. "
 
               ("C-c C-c l" . flycheck-list-errors)
               ("C-c C-c r" . lsp-rename)
-              ("C-c C-c a" . lsp-execute-code-action)
+              ("C-c C-c a" . lsp-execute-code-action) ; 对应lsp-modeline-code-actions-enable mode line上的灯泡。可以执行光标所在代码的动作
 
               ("C-c C-c p" . lsp-describe-thing-at-point)
               ("C-c C-c u" . lsp-ui-doc-glance)
