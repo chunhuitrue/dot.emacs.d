@@ -913,6 +913,16 @@ when it inserts comment at the end of the line. "
   )
 
 
+;; 高亮符号
+(use-package symbol-overlay
+  :ensure t
+  :config
+  (setq symbol-overlay-scope t)
+  :bind
+  (("M-i" . symbol-overlay-put))
+  )
+
+
 ;; ;; 自动高亮光标所在位置的符号
 ;; (use-package highlight-symbol
 ;;   :ensure t
@@ -922,3 +932,4 @@ when it inserts comment at the end of the line. "
 ;;   ;; (set-face-foreground 'highlight-symbol-face "black") ; 默认前景色
 ;;   ;; (set-face-background 'highlight-symbol-face "light yellow") ; 默认背景色
 ;;   )
+
