@@ -913,12 +913,12 @@ when it inserts comment at the end of the line. "
   )
 
 
-;; 自动高亮光标所在位置的符号
-(use-package highlight-symbol
-  :ensure t
-  :hook (prog-mode . highlight-symbol-mode)
-  :config
-  (setq highlight-symbol-idle-delay 0.1) ; 可选的，设置延迟时间
-  ;; (set-face-foreground 'highlight-symbol-face "black") ; 默认前景色
-  ;; (set-face-background 'highlight-symbol-face "light yellow") ; 默认背景色
-  )
+;; ;; 自动高亮光标所在位置的符号
+;; (use-package highlight-symbol
+;;   :ensure t
+;;   :hook (prog-mode . highlight-symbol-mode)
+;;   :config
+;;   (setq highlight-symbol-idle-delay 0.1) ; 可选的，设置延迟时间
+;;   ;; (set-face-foreground 'highlight-symbol-face "black") ; 默认前景色
+;;   ;; (set-face-background 'highlight-symbol-face "light yellow") ; 默认背景色
+;;   )
