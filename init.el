@@ -124,6 +124,8 @@
 (define-key global-map (kbd "M-g l") 'avy-goto-line)
 (define-key global-map (kbd "M-g c") 'avy-goto-word-0)
 (define-key global-map (kbd "C-x C-a") 'align)
+(define-key global-map (kbd "<f8>") 'ibuffer-bs-show)
+
 
 (setq comment-style 'extra-line)       ;多行注释
 ;; (define-key global-map (kbd "M-;") 'comment-line)     ; 多行注释
