@@ -14,19 +14,19 @@
 (add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
-;; 163镜像
-(setq package-archives '(("gnu"    . "http://mirrors.163.com/elpa/gnu/")
-                         ("nongnu" . "http://mirrors.163.com/elpa/nongnu/")
-                         ("melpa"  . "http://mirrors.163.com/elpa/melpa/")))
+;; ;; 163镜像
+;; (setq package-archives '(("gnu"    . "http://mirrors.163.com/elpa/gnu/")
+;;                          ("nongnu" . "http://mirrors.163.com/elpa/nongnu/")
+;;                          ("melpa"  . "http://mirrors.163.com/elpa/melpa/")))
 
-;; 清华镜像
-(setq package-archives '(("gnu"    . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-                         ("nongnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/nongnu/")
-                         ("melpa"  . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
+;; ;; 清华镜像
+;; (setq package-archives '(("gnu"    . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+;;                          ("nongnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/nongnu/")
+;;                          ("melpa"  . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
 
-;; 上海交大镜像
-(setq package-archives '(("gnu" . "http://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/gnu/")
-                         ("melpa" . "http://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/melpa/")))
+;; ;; 上海交大镜像
+;; (setq package-archives '(("gnu" . "http://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/gnu/")
+;;                          ("melpa" . "http://mirrors.sjtug.sjtu.edu.cn/emacs-elpa/melpa/")))
 
 ;; ;; emacs-china镜像
 ;; (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
@@ -935,3 +935,12 @@ when it inserts comment at the end of the line. "
 ;;   ;; (set-face-background 'highlight-symbol-face "light yellow") ; 默认背景色
 ;;   )
 
+
+;; https://github.com/casouri/vundo
+(use-package vundo
+  :ensure t
+  :config
+  (define-key global-map (kbd "<f7>") 'vundo)
+  ;; (setq vundo-glyph-alist vundo-unicode-symbols)
+  (set-face-attribute 'vundo-default nil :family "Symbola")
+  )
