@@ -117,7 +117,7 @@
 
 
 (define-key global-map (kbd "M-o") 'other-window)
-(define-key global-map (kbd "C-x o") 'ace-window)
+(define-key global-map (kbd "C-x o") 'ace-window)	; C-x o后?可以调出其他操作的菜单
 (define-key global-map (kbd "M-p") 'backward-paragraph) ; 跳到段落空行
 (define-key global-map (kbd "M-n") 'forward-paragraph)
 (define-key global-map (kbd "M-g M-g") 'avy-goto-word-1)
