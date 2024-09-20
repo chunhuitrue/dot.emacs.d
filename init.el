@@ -218,7 +218,7 @@ when it inserts comment at the end of the line. "
 
 
 (use-package which-key
-  :ensure
+  ;; :ensure ; emacs 30 内置了，不需要自动下载
   :delight which-key-mode
   :init
   (which-key-mode))
