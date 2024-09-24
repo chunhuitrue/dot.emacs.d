@@ -468,6 +468,19 @@ when it inserts comment at the end of the line. "
   ;; (add-hook 'c-mode-hook 'helm-gtags-mode)
   )
 
+;; #if 0 区域变灰
+(use-package hideif
+  :init
+  (progn
+    (setq hide-ifdef-style 'font-lock)
+    (setq hide-ifdef-global-modes '(c-mode c++-mode))
+    (add-hook 'c-mode-common-hook
+              (lambda ()
+		(setq hide-ifdef-shadow t)
+		(setq hide-ifdef-mode t)
+		(hide-ifdefs)))
+    ))
+
 
 (use-package rustic
   :ensure
@@ -972,3 +985,4 @@ when it inserts comment at the end of the line. "
                                       xref-go-back
                                       xref-find-definitions
                                       xref-find-references)))
+
