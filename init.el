@@ -987,13 +987,7 @@ when it inserts comment at the end of the line. "
                                       xref-find-references)))
 
 
-;; (defun update-tmux-window-name ()
-;;   "更新tmux窗口名称为当前打开的文件名。"
-;;   (interactive)
-;;   (let ((file-name (buffer-file-name)))
-;;     (when file-name
-;;       (shell-command (format "tmux rename-window '%s'" file-name)))))
-
+;; 让tmux窗口名显示为emacsclient的当前buff名
 (defun update-tmux-window-name ()
   "更新tmux窗口名称为当前激活的emacs缓冲区名称，如果是一个普通文件缓冲区。并且忽略*开头的来临时buff"
   (interactive)
@@ -1003,3 +997,17 @@ when it inserts comment at the end of the line. "
 
 (add-hook 'server-after-make-frame-hook 'update-tmux-window-name)
 (add-hook 'buffer-list-update-hook 'update-tmux-window-name)
+
+(defun reset-tmux-window-name ()
+  "在emacsclient断开连接时重置tmux窗口名称。"
+  (interactive)
+  (shell-command "tmux set-window-option automatic-rename on")) ; 你可以根据需要更改重置后的窗口名称
+
+(defun add-tmux-reset-on-exit ()
+  "为当前frame添加退出时更新tmux窗口名称的功能。"
+  (add-hook 'delete-frame-functions
+            (lambda (frame)
+              (when (eq frame (selected-frame))
+                (reset-tmux-window-name)))))
+
+(add-hook 'server-after-make-frame-hook 'add-tmux-reset-on-exit)
