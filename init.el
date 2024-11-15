@@ -995,10 +995,10 @@ when it inserts comment at the end of the line. "
 ;;       (shell-command (format "tmux rename-window '%s'" file-name)))))
 
 (defun update-tmux-window-name ()
-  "更新tmux窗口名称为当前激活的emacs缓冲区名称。"
+  "更新tmux窗口名称为当前激活的emacs缓冲区名称，如果是一个普通文件缓冲区。"
   (interactive)
   (let ((buffer-name (buffer-name)))
-    (when buffer-name
+    (when (and buffer-name (not (string-match-p "^*" buffer-name)))
       (shell-command (format "tmux rename-window '%s'" buffer-name)))))
 
 (add-hook 'server-after-make-frame-hook 'update-tmux-window-name)
