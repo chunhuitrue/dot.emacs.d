@@ -986,3 +986,20 @@ when it inserts comment at the end of the line. "
                                       xref-find-definitions
                                       xref-find-references)))
 
+
+;; (defun update-tmux-window-name ()
+;;   "更新tmux窗口名称为当前打开的文件名。"
+;;   (interactive)
+;;   (let ((file-name (buffer-file-name)))
+;;     (when file-name
+;;       (shell-command (format "tmux rename-window '%s'" file-name)))))
+
+(defun update-tmux-window-name ()
+  "更新tmux窗口名称为当前激活的emacs缓冲区名称。"
+  (interactive)
+  (let ((buffer-name (buffer-name)))
+    (when buffer-name
+      (shell-command (format "tmux rename-window '%s'" buffer-name)))))
+
+(add-hook 'server-after-make-frame-hook 'update-tmux-window-name)
+(add-hook 'buffer-list-update-hook 'update-tmux-window-name)
