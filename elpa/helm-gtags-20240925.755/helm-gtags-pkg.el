@@ -3,7 +3,7 @@
   "GNU GLOBAL helm interface."
   '((emacs "24.4")
     (helm  "2.0"))
-  :url "https://github.com/emacsorphanage/helm-gtags"
+  :url "https://github.com/syohex/emacs-helm-gtags"
   :commit "f51eec4a39d7a38a030fd37e40834f1ca9b61e00"
   :revdesc "f51eec4a39d7"
   :authors '(("Syohei YOSHIDA" . "syohex@gmail.com"))
