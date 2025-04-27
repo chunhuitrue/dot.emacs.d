@@ -6,7 +6,8 @@
 ;; Maintainer: Mike Hamrick <mikeh@muppetlabs.com>
 ;; Created: 25 Dec 2019
 ;; Modified: 04 Jan 2020
-;; Version: 0.0.2
+;; Package-Version: 20200327.2241
+;; Package-Revision: 7ee3f9c52f70
 ;; Package-Requires: ((emacs "25.1"))
 ;; Keywords: terminals convenience
 ;; URL: https://github.com/spudlyo/clipetty

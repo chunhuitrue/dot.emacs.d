@@ -1,0 +1,2 @@
+;; Generated package description from golden-ratio.el  -*- no-byte-compile: t -*-
+(define-package "golden-ratio" "1.0.1" "Automatic resizing of Emacs windows to the golden ratio" 'nil :commit "362ab0ede7ee2bb9fd11aea119b9c22248649c0d" :url "https://elpa.nongnu.org/nongnu/golden-ratio.html" :authors '(("Roman Gonzalez" . "romanandreg@gmail.com")) :maintainer '("Roman Gonzalez" . "romanandreg@gmail.com") :keywords '("window" "resizing"))

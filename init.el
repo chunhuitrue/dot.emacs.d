@@ -1,18 +1,12 @@
-;; This is to support loading from a non-standard .emacs.d
-;; via emacs -q --load "/path/to/standalone.el"
-;; see https://emacs.stackexchange.com/a/4258/22184
-
-
 (setq user-init-file (or load-file-name (buffer-file-name)))
 (setq user-emacs-directory (file-name-directory user-init-file))
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
 
 
-(require 'package)
-(add-to-list 'package-archives '("gnu"   . "http://elpa.gnu.org/packages/"))
+;; package
+(add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-;; (add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/"))
 
 ;; ;; 163镜像
 ;; (setq package-archives '(("gnu"    . "http://mirrors.163.com/elpa/gnu/")
@@ -32,14 +26,6 @@
 ;; (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
 ;;                          ("melpa" . "http://elpa.emacs-china.org/melpa/")))
 
-(setq package-user-dir (expand-file-name "elpa/" user-emacs-directory))
-(package-initialize)
-
-;; Install use-package that we require for managing all other dependencies
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
 
 (server-start)
 (load-theme 'tango-dark t)
@@ -54,6 +40,8 @@
 (column-number-mode t)
 (electric-pair-mode t)
 ;; (setq word-wrap-by-category t)             ;按照中文折行
+(which-key-mode)
+
 
 ;; 全局的默认缩进
 (setq tab-width 4)
@@ -85,14 +73,6 @@
       scroll-conservatively 10000)
 
 
-;; ;; 不太好使。ec之后仍然会出现，一切换到其他buff之后才关闭scratch
-;; ;; 不显示 *scratch*
-;; (defun remove-scratch-buffer ()
-;;   (if (get-buffer "*scratch*")
-;;       (kill-buffer "*scratch*")))
-;; (add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
-
-
 ;; 自动保存
 ;; (setq auto-save-default nil)
 ;; (setq undo-tree-auto-save-history nil)
@@ -120,9 +100,9 @@
 (define-key global-map (kbd "C-x o") 'ace-window)	; C-x o后?可以调出其他操作的菜单
 (define-key global-map (kbd "M-p") 'backward-paragraph) ; 跳到段落空行
 (define-key global-map (kbd "M-n") 'forward-paragraph)
-(define-key global-map (kbd "M-g M-g") 'avy-goto-word-1)
+(define-key global-map (kbd "M-g M-g") 'avy-goto-char-timer)
 (define-key global-map (kbd "M-g l") 'avy-goto-line)
-(define-key global-map (kbd "M-g c") 'avy-goto-word-0)
+(define-key global-map (kbd "M-g c") 'avy-goto-word-1)
 (define-key global-map (kbd "C-x C-a") 'align)
 (define-key global-map (kbd "<f8>") 'ibuffer-bs-show)
 
@@ -217,13 +197,6 @@ when it inserts comment at the end of the line. "
 ;;                     )
 
 
-(use-package which-key
-  :ensure
-  :delight which-key-mode
-  :init
-  (which-key-mode))
-
-
 (use-package golden-ratio
   :ensure
   :delight golden-ratio-mode
@@ -232,9 +205,11 @@ when it inserts comment at the end of the line. "
   :config
   ;; ace-window用编号切换窗口后，激活光标所在窗口的golden-ratio
   ;; 使其按比例放大
-  (defadvice ace-window (after my-ace-window-advice activate)
-    "Call golden-ratio after ace-window."
-    (golden-ratio))
+  (defun my-ace-window-advice (&rest _)
+    "My custom advice for `ace-window'."
+    (golden-ratio)
+     )
+  (advice-add 'ace-window :after #'my-ace-window-advice)
 
   ;; 在ediff 和helm界面下禁用
   ;; https://github.com/roman/golden-ratio.el/wiki
@@ -248,33 +223,12 @@ when it inserts comment at the end of the line. "
     (and (boundp 'ediff-this-buffer-ediff-sessions)
 	 ediff-this-buffer-ediff-sessions))
 
-  ;; The version which also called balance-windows at this point looked
-  ;; a bit broken, but could probably be replaced with:
-  ;;
-  ;; (defun pl/ediff-comparison-buffer-p ()
-  ;;   (and (boundp 'ediff-this-buffer-ediff-sessions)
-  ;;        ediff-this-buffer-ediff-sessions
-  ;;        (prog1 t (balance-windows))))
-  ;;
-  ;; However I think the following has the desired effect, and without
-  ;; messing with the ediff control buffer:
-  ;;
   (add-hook 'ediff-startup-hook 'my-ediff-startup-hook)
 
   (defun my-ediff-startup-hook ()
     "Workaround to balance the ediff windows when golden-ratio is enabled."
-    ;; There's probably a better way to do it.
     (ediff-toggle-split)
     (ediff-toggle-split))
-
-  ;; 这段设置对helm没效果
-  ;; ;; helm
-  ;; (eval-after-load "golden-ratio"
-  ;;   '(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p))
-
-  ;; (defun pl/helm-alive-p ()
-  ;;   (and (boundp 'helm-alive-p)
-  ;; 	 (symbol-value 'helm-alive-p)))
   )
 
 
@@ -287,7 +241,7 @@ when it inserts comment at the end of the line. "
   (add-hook 'text-mode-hook 'yas-minor-mode)
   )
 
-(use-package yasnippet-snippets
+(use-package   yasnippet-snippets
   :ensure
   )
 
@@ -300,7 +254,8 @@ when it inserts comment at the end of the line. "
               ("C-n". company-select-next)
               ("C-p". company-select-previous)
               ("M-<". company-select-first)
-              ("M->". company-select-last))
+              ("M->". company-select-last)
+	      )
   (:map company-mode-map
         ("<tab>". tab-indent-or-complete)
         ("TAB". tab-indent-or-complete))
@@ -343,11 +298,7 @@ when it inserts comment at the end of the line. "
 (use-package magit
   :ensure
   :config
-  ;; 如果想获取 magit-section-initial-visibility-alist 值中具体某个类型名称，可 M-x magit-describe-section-briefly 获取。
-  ;; 比如想知道 Recent commits 这个版块的类型名称：
-  ;; 1. 光标在Recent commits上， M-x magit-describe-section-briefly RET ，得到 #<magit-section “@{upstream}…”
-  ;; [unpushed status] 372-935>，所以类型名称为 unpushed
-  ;; 2. 由此设置可使 “Recent commits” 和 “Unpulled from upstream” 在打开 magit-st时自动展开。
+  ;; 此设置可使 “Recent commits” 和 “Unpulled from upstream” 在打开 magit-st时自动展开。
   ;; (setq magit-section-initial-visibility-alist
   ;;       '(
   ;;         ;; (stashes . hide)
@@ -389,7 +340,7 @@ when it inserts comment at the end of the line. "
 ;; https://github.com/bbatsov/helm-projectile
 ;; https://tuhdo.github.io/helm-projectile.html
 (use-package helm-projectile
-  :ensure t
+  :ensure
   :init
   ;; (helm-projectile-on)
   )
@@ -397,7 +348,7 @@ when it inserts comment at the end of the line. "
 
 ;; https://docs.projectile.mx/projectile/configuration.html
 (use-package projectile
-  :ensure t
+  :ensure
   :delight '(:eval (concat " " (projectile-project-name)))
   :init
   (projectile-mode +1)
@@ -411,20 +362,18 @@ when it inserts comment at the end of the line. "
   )
 
 
-;; If your default face is a fixed pitch (monospace) face, but in AsciiDoc files you liked to have normal text with a variable pitch face, buffer-face-mode is for you: (add-hook 'adoc-mode-hook (lambda() (buffer-face-mode t)))
-(use-package adoc-mode
-  :ensure t
-  )
-
-
 (use-package yaml-mode
-  :ensure t
+  :ensure
   :config
   (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
   (add-hook 'yaml-mode-hook
             #'(lambda ()
                 (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
   )
+
+
+;; If your default face is a fixed pitch (monospace) face, but in AsciiDoc files you liked to have normal text with a variable pitch face, buffer-face-mode is for you: (add-hook 'adoc-mode-hook (lambda() (buffer-face-mode t)))
+;; (use-package adoc-mode)
 
 
 (use-package json-mode
@@ -435,15 +384,15 @@ when it inserts comment at the end of the line. "
   )
 
 
-;; https://emacs-lsp.github.io/lsp-mode/page/lsp-lua-lsp/
-;; lsp-clients-lua-lsp-server-install-dir 可配 默认是~/.luarocks/bin/
-(use-package lua-mode
-  :ensure
-  :config
-  (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
-  (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
-  (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
-  )
+;; ;; https://emacs-lsp.github.io/lsp-mode/page/lsp-lua-lsp/
+;; ;; lsp-clients-lua-lsp-server-install-dir 可配 默认是~/.luarocks/bin/
+;; (use-package lua-mode
+;;   :ensure
+;;   :config
+;;   (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+;;   (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+;;   (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
+;;   )
 
 
 (use-package cc-mode
@@ -468,8 +417,10 @@ when it inserts comment at the end of the line. "
   ;; (add-hook 'c-mode-hook 'helm-gtags-mode)
   )
 
+
 ;; #if 0 区域变灰
 (use-package hideif
+  :ensure
   :init
   (progn
     (setq hide-ifdef-style 'font-lock)
@@ -543,6 +494,7 @@ when it inserts comment at the end of the line. "
 ;; [Treemacs] Warning: coudn’t find default background colour for icons, falling back on #2d2d31.
 ;; [Treemacs] Warning: couldn’t find hl-line-mode’s background color for icons, falling back on #2d2d31.
 (use-package treemacs
+  :ensure
   :init
   (setq treemacs-no-load-time-warnings t)
   )
@@ -674,19 +626,19 @@ when it inserts comment at the end of the line. "
   (lsp-ui-doc-enable nil))
 
 
-(use-package lsp-treemacs :ensure)
+(use-package lsp-treemacs
+  :ensure
+  )
 
 
 ;; ;; dap-mode 需要此包
 ;; (use-package exec-path-from-shell
-;;   :ensure
 ;;   :init (exec-path-from-shell-initialize))
 
 ;; ;; dap-mode
 ;; ;; https://robert.kra.hn/posts/rust-emacs-setup/
 ;; (when (executable-find "lldb-mi")
 ;;   (use-package dap-mode
-;;     :ensure
 ;;     :bind (:map dap-mode
 ;;                 ("C-c C-c y" . dap-hydra)
 ;;                 )
@@ -713,7 +665,7 @@ when it inserts comment at the end of the line. "
 ;; mac下不需要tmux配合其他配置
 ;; https://github.com/spudlyo/clipetty
 (use-package clipetty
-  :ensure t
+  :ensure
   :hook (after-init . global-clipetty-mode)
   )
 
@@ -810,7 +762,6 @@ when it inserts comment at the end of the line. "
 ;; ;; C-z ?
 ;; ;; Show key bindings of ElScreen and Add-On softwares.
 ;; (use-package elscreen
-;;   :ensure t
 ;;   :config
 ;;   (setq elscreen-prefix-key "\C-z")     ; C-z 默认是挂起emacs到后台,改为elscreen前缀之后，可以用C-x C-z 来挂起emacs
 ;;   )
@@ -824,7 +775,6 @@ when it inserts comment at the end of the line. "
 ;; ;; 这时切换到其他地方再切换回原来名字的layout，会恢复最初的状态，并不会保留最后跳转后的状态。
 ;; ;; 如果要保留最后状态，需要切换之前保存一下当前layout。  很麻烦
 ;; (use-package ivy
-;;   :ensure t
 ;;   :delight ivy-mode
 ;;   :hook (after-init . ivy-mode)
 ;;   :config
@@ -846,7 +796,7 @@ when it inserts comment at the end of the line. "
 
 
 ;; rg需要此包
-(use-package wgrep
+(use-package   wgrep
   :ensure
   )
 
@@ -913,7 +863,7 @@ when it inserts comment at the end of the line. "
 ;; 自动删除行尾空格
 ;; https://github.com/lewang/ws-butler
 (use-package ws-butler
-  :ensure t
+  :ensure
   :hook (
 	 ;; (text-mode . ws-butler-mode)
          (prog-mode . ws-butler-mode)
@@ -930,7 +880,7 @@ when it inserts comment at the end of the line. "
 
 ;; 高亮符号
 (use-package symbol-overlay
-  :ensure t
+  :ensure
   :config
   (setq symbol-overlay-scope t)
   :bind
@@ -940,7 +890,7 @@ when it inserts comment at the end of the line. "
 
 ;; ;; 自动高亮光标所在位置的符号
 ;; (use-package highlight-symbol
-;;   :ensure t
+;;   :ensure
 ;;   :hook (prog-mode . highlight-symbol-mode)
 ;;   :config
 ;;   (setq highlight-symbol-idle-delay 0.1) ; 可选的，设置延迟时间
@@ -951,7 +901,7 @@ when it inserts comment at the end of the line. "
 
 ;; https://github.com/casouri/vundo
 (use-package vundo
-  :ensure t
+  :ensure
   :config
   (define-key global-map (kbd "<f7>") 'vundo)
   ;; (setq vundo-glyph-alist vundo-unicode-symbols)
@@ -960,8 +910,7 @@ when it inserts comment at the end of the line. "
 
 
 (use-package dogears
-  :ensure t
-  ;; :straight t
+  :ensure
   :hook (after-init . dogears-mode)
   :bind (:map global-map
               ("M-g d" . dogears-go)
@@ -1011,3 +960,4 @@ when it inserts comment at the end of the line. "
                 (reset-tmux-window-name)))))
 
 (add-hook 'server-after-make-frame-hook 'add-tmux-reset-on-exit)
+

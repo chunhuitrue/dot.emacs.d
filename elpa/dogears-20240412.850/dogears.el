@@ -4,7 +4,8 @@
 
 ;; Author: Adam Porter <adam@alphapapa.net>
 ;; URL: https://github.com/alphapapa/dogears.el
-;; Version: 0.2-pre
+;; Package-Version: 20240412.850
+;; Package-Revision: 162671e66cac
 ;; Package-Requires: ((emacs "26.3") (map "2.1"))
 ;; Keywords: convenience
 

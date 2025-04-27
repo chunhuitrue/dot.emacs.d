@@ -10,3 +10,5 @@ auto-save-list/
 transient
 tree-sitter
 .dap-breakpoints
+tramp
+.DS_Store
