@@ -480,6 +480,21 @@ when it inserts comment at the end of the line. "
   )
 
 
+;; python
+(use-package lsp-pyright
+  :ensure t
+  :custom
+  (lsp-pyright-langserver-command "basedpyright") ;; "pyright" or "basedpyright"
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp-deferred))) ; lsp-deferred is recommended for better startup performance
+  :config
+  (setq lsp-pyright-type-checking-mode "off") ; You can set this to "off", "basic", or "strict"
+  (setq lsp-pyright-disable-language-services nil)
+  (setq lsp-pyright-disable-organize-imports nil)
+  )
+
+
 (use-package toml-mode
   :ensure
   :config
