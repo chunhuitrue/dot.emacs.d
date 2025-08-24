@@ -489,7 +489,7 @@ when it inserts comment at the end of the line. "
                          (require 'lsp-pyright)
                          (lsp-deferred))) ; lsp-deferred is recommended for better startup performance
   :config
-  (setq lsp-pyright-type-checking-mode "off") ; You can set this to "off", "basic", or "strict"
+  (setq lsp-pyright-type-checking-mode "basic") ; You can set this to "off", "basic", or "strict"
   (setq lsp-pyright-disable-language-services nil)
   (setq lsp-pyright-disable-organize-imports nil)
   )
