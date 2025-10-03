@@ -811,7 +811,7 @@ when it inserts comment at the end of the line. "
 
 
 ;; rg需要此包
-(use-package   wgrep
+(use-package wgrep
   :ensure
   )
 
@@ -976,3 +976,14 @@ when it inserts comment at the end of the line. "
 
 (add-hook 'server-after-make-frame-hook 'add-tmux-reset-on-exit)
 
+
+;; https://github.com/emacs-vs/goto-line-preview
+(use-package goto-line-preview
+  :ensure
+  :config
+  (global-set-key [remap goto-line] 'goto-line-preview)
+  ;; Highlight 1.5 seconds when change preview line
+  (setq goto-line-preview-hl-duration 1.5)
+  ;; Change highlight background color to white
+  (set-face-background 'goto-line-preview-hl "cyan3")
+  )
