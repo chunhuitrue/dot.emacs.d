@@ -987,3 +987,12 @@ when it inserts comment at the end of the line. "
   ;; Change highlight background color to white
   (set-face-background 'goto-line-preview-hl "cyan3")
   )
+
+
+(use-package markdown-mode
+  :ensure t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown")
+  :bind (:map markdown-mode-map
+              ("C-c C-e" . markdown-do))
+  )
