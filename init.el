@@ -41,6 +41,8 @@
 (electric-pair-mode t)
 ;; (setq word-wrap-by-category t)             ;按照中文折行
 (which-key-mode)
+;; 解决中文的引号双引号处理混乱问题
+(setopt cjk-ambiguous-chars-are-wide nil)
 
 
 ;; 全局的默认缩进
