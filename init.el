@@ -998,3 +998,30 @@ when it inserts comment at the end of the line. "
   :bind (:map markdown-mode-map
               ("C-c C-e" . markdown-do))
   )
+
+
+;; AI Reference Copy
+;; 在claude code cli，或者其他cli编码工具中引用一段代码的时候，需要在输入框中输入 @file 12-123行。然后再写提示词指令...这就要在cli编码工具和编辑器之间来回切换，先切换到编辑器记住代码行号范围，再切换到cli编码工具写行号。比较麻烦。如果能在编辑器中选中一段代码，然后直接把选中的代码段转换成 @file 12-123行这样的描述，就可以一次性粘贴到cli编码工具的输入框。
+(defun ai-ref-copy-region ()
+  "Copy the selected code reference to clipboard in format: @project/file start-end"
+  (interactive)
+  (if (use-region-p)
+      (let* ((start (region-beginning))
+             (end (region-end))
+             (file-path (buffer-file-name))
+             ;; Try to find project root using projectile or vc
+             (project-root (or (and (fboundp 'projectile-project-root)
+                                    (projectile-project-root))
+                               (and (fboundp 'vc-root-dir)
+                                    (vc-root-dir))))
+             (path-to-use (if project-root
+                              (let ((root-parent (file-name-directory (directory-file-name project-root))))
+                                (file-relative-name file-path root-parent))
+                            file-path))
+             (start-line (line-number-at-pos start))
+             (end-line (line-number-at-pos end))
+             (ref-string (format "@%s %d-%d" path-to-use start-line end-line)))
+        (kill-new ref-string)
+        (message "Copied reference: %s" ref-string))
+    (message "No region selected")))
+(define-key global-map (kbd "C-x @") 'ai-ref-copy-region)
