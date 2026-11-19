@@ -357,7 +357,7 @@ when it inserts comment at the end of the line. "
   :init
   (projectile-mode +1)
   :config
-  (projectile-global-mode)
+  (projectile-mode)
   (helm-projectile-on)
   (setq projectile-enable-caching t)
   (setq projectile-completion-system 'helm)
