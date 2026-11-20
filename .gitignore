@@ -3,6 +3,7 @@ eln-cache
 .cache/
 .lsp-session-v1
 projectile-bookmarks.eld
+projectile-frecency.eld
 projectile.cache
 projects
 recentf
